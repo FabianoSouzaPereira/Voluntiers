@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.ui.login.ui.login
+package com.fabianodev.voluntiers.ui.login.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
