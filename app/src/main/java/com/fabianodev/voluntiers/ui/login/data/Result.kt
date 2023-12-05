@@ -1,4 +1,4 @@
-package com.example.voluntiers.ui.login.data
+package com.fabianodev.voluntiers.ui.login.data
 
 /**
  * A generic class that holds a value with its loading status.

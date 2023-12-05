@@ -1,4 +1,4 @@
-package com.example.voluntiers.ui.login.ui.login
+package com.fabianodev.voluntiers.ui.login.ui.login
 
 /**
  * Data validation state of the login form.

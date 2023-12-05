@@ -1,8 +1,7 @@
-package com.example.voluntiers
+package com.fabianodev.voluntiers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.fabianodev.voluntiers.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

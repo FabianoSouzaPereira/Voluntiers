@@ -1,13 +1,12 @@
-package com.example.voluntiers.ui.login.ui.login
+package com.fabianodev.voluntiers.ui.login.ui.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.voluntiers.R
-import com.example.voluntiers.ui.login.data.LoginRepository
-import com.example.voluntiers.ui.login.data.Result
 import com.fabianodev.voluntiers.R
+import com.fabianodev.voluntiers.ui.login.data.LoginRepository
+import com.fabianodev.voluntiers.ui.login.data.Result
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 

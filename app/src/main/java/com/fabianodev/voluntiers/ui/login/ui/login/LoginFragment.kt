@@ -1,4 +1,4 @@
-package com.example.voluntiers.ui.login.ui.login
+package com.fabianodev.voluntiers.ui.login.ui.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,8 +12,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.voluntiers.R
-import com.example.voluntiers.databinding.FragmentLoginBinding
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
 

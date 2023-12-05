@@ -1,6 +1,6 @@
-package com.example.voluntiers.ui.login.data
+package com.fabianodev.voluntiers.ui.login.data
 
-import com.example.voluntiers.ui.login.data.model.LoggedInUser
+import com.fabianodev.voluntiers.ui.login.data.model.LoggedInUser
 import java.io.IOException
 
 /**

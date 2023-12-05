@@ -1,6 +1,6 @@
-package com.example.voluntiers.ui.login.data
+package com.fabianodev.voluntiers.ui.login.data
 
-import com.example.voluntiers.ui.login.data.model.LoggedInUser
+import com.fabianodev.voluntiers.ui.login.data.model.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

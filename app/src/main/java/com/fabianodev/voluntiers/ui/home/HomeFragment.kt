@@ -1,4 +1,4 @@
-package com.example.voluntiers.ui.home
+package com.fabianodev.voluntiers.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.voluntiers.R
 import com.fabianodev.voluntiers.R
 
 class HomeFragment : Fragment() {

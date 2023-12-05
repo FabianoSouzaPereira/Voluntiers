@@ -1,4 +1,4 @@
-package com.example.voluntiers.ui.home
+package com.fabianodev.voluntiers.ui.home
 
 import androidx.lifecycle.ViewModel
 
