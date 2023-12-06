@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.data.login.DataResult
-import com.fabianodev.voluntiers.data.login.LoginRepository
+import com.fabianodev.voluntiers.domain.repositories.ILoginRepository
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(private val loginRepository: ILoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm

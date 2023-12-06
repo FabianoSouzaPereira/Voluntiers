@@ -2,8 +2,8 @@ package com.fabianodev.voluntiers.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.fabianodev.voluntiers.data.login.ILoginRepositoryImpl
 import com.fabianodev.voluntiers.data.login.LoginDataSource
-import com.fabianodev.voluntiers.data.login.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
@@ -15,7 +15,7 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
-                loginRepository = LoginRepository(
+                loginRepository = ILoginRepositoryImpl(
                     dataSource = LoginDataSource()
                 )
             ) as T

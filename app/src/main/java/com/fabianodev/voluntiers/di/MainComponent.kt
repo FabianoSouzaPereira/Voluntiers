@@ -2,6 +2,7 @@ package com.fabianodev.voluntiers.di
 
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.presentation.home.HomeFragment
+import com.fabianodev.voluntiers.presentation.login.LoginFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainModule::class])
@@ -14,5 +15,6 @@ interface MainComponent {
 
     fun inject(activity: MainActivity)
     fun inject(fragment: HomeFragment)
+    fun inject(fragment: LoginFragment)
 
 }

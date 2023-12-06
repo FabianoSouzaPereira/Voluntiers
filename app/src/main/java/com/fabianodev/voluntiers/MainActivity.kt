@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var mainComponent: MainComponent
     override fun onCreate(savedInstanceState: Bundle?) {
-        //   mainComponent =
-        //       (applicationContext as AppApplication).appComponent.mainComponent().create()
+        mainComponent =
+            (applicationContext as AppApplication).appComponent.mainComponent().create()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
