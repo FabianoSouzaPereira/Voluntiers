@@ -1,8 +1,7 @@
-package com.fabianodev.voluntiers.ui.di
+package com.fabianodev.voluntiers.di
 
 import androidx.lifecycle.ViewModel
-import com.fabianodev.voluntiers.rest.api.di.ViewModelKey
-import com.fabianodev.voluntiers.ui.home.HomeViewModel
+import com.fabianodev.voluntiers.presentation.home.HomeViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

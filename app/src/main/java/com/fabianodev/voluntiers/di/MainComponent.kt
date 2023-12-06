@@ -1,7 +1,7 @@
-package com.fabianodev.voluntiers.ui.di
+package com.fabianodev.voluntiers.di
 
 import com.fabianodev.voluntiers.MainActivity
-import com.fabianodev.voluntiers.ui.home.HomeFragment
+import com.fabianodev.voluntiers.presentation.home.HomeFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainModule::class])

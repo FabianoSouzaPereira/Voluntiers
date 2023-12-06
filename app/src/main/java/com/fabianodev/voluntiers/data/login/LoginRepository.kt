@@ -1,13 +1,14 @@
-package com.fabianodev.voluntiers.ui.login.data
+package com.fabianodev.voluntiers.data.login
 
-import com.fabianodev.voluntiers.ui.login.data.model.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.LoggedInUser
+import javax.inject.Inject
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
+class LoginRepository @Inject constructor(val dataSource: LoginDataSource) {
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -27,11 +28,11 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String, password: String): DataResult<LoggedInUser> {
         // handle login
         val result = dataSource.login(username, password)
 
-        if (result is Result.Success) {
+        if (result is DataResult.Success) {
             setLoggedInUser(result.data)
         }
 

@@ -1,7 +1,6 @@
-package com.fabianodev.voluntiers.rest.api.di
+package com.fabianodev.voluntiers.di
 
 import android.content.Context
-import com.fabianodev.voluntiers.ui.di.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module

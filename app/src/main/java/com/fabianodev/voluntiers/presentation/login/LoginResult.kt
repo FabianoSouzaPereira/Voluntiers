@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.ui.login.login
+package com.fabianodev.voluntiers.presentation.login
 
 /**
  * Authentication result : success (user details) or error message.

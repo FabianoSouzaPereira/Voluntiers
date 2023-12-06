@@ -1,9 +1,9 @@
-package com.fabianodev.voluntiers.ui.login.login
+package com.fabianodev.voluntiers.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.fabianodev.voluntiers.ui.login.data.LoginDataSource
-import com.fabianodev.voluntiers.ui.login.data.LoginRepository
+import com.fabianodev.voluntiers.data.login.LoginDataSource
+import com.fabianodev.voluntiers.data.login.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

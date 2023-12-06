@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.rest.api.di
+package com.fabianodev.voluntiers.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

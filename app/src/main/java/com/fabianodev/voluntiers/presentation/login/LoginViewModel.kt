@@ -1,14 +1,15 @@
-package com.fabianodev.voluntiers.ui.login.login
+package com.fabianodev.voluntiers.presentation.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.R
-import com.fabianodev.voluntiers.ui.login.data.LoginRepository
-import com.fabianodev.voluntiers.ui.login.data.Result
+import com.fabianodev.voluntiers.data.login.DataResult
+import com.fabianodev.voluntiers.data.login.LoginRepository
+import javax.inject.Inject
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -20,7 +21,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         // can be launched in a separate asynchronous job
         val result = loginRepository.login(username, password)
 
-        if (result is Result.Success) {
+        if (result is DataResult.Success) {
             _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
