@@ -1,5 +1,5 @@
 package com.fabianodev.voluntiers.domain.repositories
 
-interface IRepository {
-    fun login()
+interface HomeRepository {
+    fun getUsers()
 }

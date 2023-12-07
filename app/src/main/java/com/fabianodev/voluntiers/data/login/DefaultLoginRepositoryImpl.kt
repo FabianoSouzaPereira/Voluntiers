@@ -2,10 +2,10 @@ package com.fabianodev.voluntiers.data.login
 
 import android.content.Context
 import com.fabianodev.voluntiers.domain.model.LoggedInUser
-import com.fabianodev.voluntiers.domain.repositories.ILoginRepository
+import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 
-class ILoginRepositoryImpl @Inject constructor(val context: Context, val dataSource: LoginDataSource ) : ILoginRepository {
+class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, val dataSource: LoginDataSource) : LoginRepository {
     // in-memory cache of the loggedInUser object
     override var user: LoggedInUser? = null
 

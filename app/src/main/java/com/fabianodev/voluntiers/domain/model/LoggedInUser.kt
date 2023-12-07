@@ -1,7 +1,7 @@
 package com.fabianodev.voluntiers.domain.model
 
 /**
- * Data class that captures user information for logged in users retrieved from ILoginRepository
+ * Data class that captures user information for logged in users retrieved from LoginRepository
  */
 data class LoggedInUser(
     val userId: String,

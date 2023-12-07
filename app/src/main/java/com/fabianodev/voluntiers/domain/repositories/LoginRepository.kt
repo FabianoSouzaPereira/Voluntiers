@@ -9,7 +9,7 @@ import com.fabianodev.voluntiers.domain.model.LoggedInUser
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-interface ILoginRepository {
+interface LoginRepository {
     var user: LoggedInUser?
     val isLoggedIn: Boolean
     fun logout()
