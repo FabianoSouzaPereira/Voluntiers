@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.presentation.login
+package com.fabianodev.voluntiers.domain.model.login
 
 /**
  * User details post authentication that is exposed to the UI

@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.data.login.DataResult
+import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
+import com.fabianodev.voluntiers.domain.model.login.LoginFormState
+import com.fabianodev.voluntiers.domain.model.login.LoginResult
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 

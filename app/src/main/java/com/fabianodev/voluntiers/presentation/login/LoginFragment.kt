@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
+import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
 import javax.inject.Inject
 
 

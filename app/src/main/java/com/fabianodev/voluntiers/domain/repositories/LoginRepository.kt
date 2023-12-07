@@ -1,7 +1,7 @@
 package com.fabianodev.voluntiers.domain.repositories
 
 import com.fabianodev.voluntiers.data.login.DataResult
-import com.fabianodev.voluntiers.domain.model.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
 
 
 /**
@@ -12,7 +12,7 @@ import com.fabianodev.voluntiers.domain.model.LoggedInUser
 interface LoginRepository {
     var user: LoggedInUser?
     val isLoggedIn: Boolean
-    fun logout()
-    fun login(username: String, password: String): DataResult<LoggedInUser>
-    fun setLoggedInUser(loggedInUser: LoggedInUser)
+    suspend fun logout()
+    suspend fun login(username: String, password: String): DataResult<LoggedInUser>
+    suspend fun setLoggedInUser(loggedInUser: LoggedInUser)
 }
