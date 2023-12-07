@@ -1,10 +1,11 @@
 package com.fabianodev.voluntiers.data.login
 
+import android.content.Context
 import com.fabianodev.voluntiers.domain.model.LoggedInUser
 import com.fabianodev.voluntiers.domain.repositories.ILoginRepository
+import javax.inject.Inject
 
-class ILoginRepositoryImpl(val dataSource: LoginDataSource) : ILoginRepository {
-
+class ILoginRepositoryImpl @Inject constructor(val context: Context, val dataSource: LoginDataSource ) : ILoginRepository {
     // in-memory cache of the loggedInUser object
     override var user: LoggedInUser? = null
 
@@ -15,11 +16,11 @@ class ILoginRepositoryImpl(val dataSource: LoginDataSource) : ILoginRepository {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
         user = null
+
     }
 
     override fun logout() {
         user = null
-        dataSource.logout()
     }
 
     override fun login(username: String, password: String): DataResult<LoggedInUser> {

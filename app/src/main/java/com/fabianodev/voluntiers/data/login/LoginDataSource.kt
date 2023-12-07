@@ -3,11 +3,12 @@ package com.fabianodev.voluntiers.data.login
 import com.fabianodev.voluntiers.domain.model.LoggedInUser
 import java.io.IOException
 import java.util.UUID
+import javax.inject.Inject
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-class LoginDataSource {
+class LoginDataSource @Inject constructor() {
 
     fun login(username: String, password: String): DataResult<LoggedInUser> {
         try {
