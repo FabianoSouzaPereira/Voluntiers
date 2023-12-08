@@ -16,7 +16,7 @@ Additionally, the architecture's scalability benefits from layer division, allow
   Used Layers in this project 
   - Data
   - Domain
-  - Pesenter
+  - Presentation
 <br />
 
 ## Data
