@@ -17,8 +17,10 @@ Additionally, the architecture's scalability benefits from layer division, allow
   - Data
   - Domain
   - Presentation
+<br />
 
-    ![alt text](https://github.com/FabianoSouzaPereira/Voluntiers/blob/feature/UseCase/images/clean_arch.png?raw=true)
+![alt text](https://github.com/FabianoSouzaPereira/Voluntiers/blob/feature/UseCase/images/clean_arch.png?raw=true)
+    
 <br />
 
 ## Data
