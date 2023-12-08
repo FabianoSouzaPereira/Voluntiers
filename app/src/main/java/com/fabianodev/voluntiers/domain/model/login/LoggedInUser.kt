@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.domain.model
+package com.fabianodev.voluntiers.domain.model.login
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

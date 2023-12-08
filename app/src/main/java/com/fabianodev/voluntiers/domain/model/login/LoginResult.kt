@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.presentation.login
+package com.fabianodev.voluntiers.domain.model.login
 
 /**
  * Authentication result : success (user details) or error message.

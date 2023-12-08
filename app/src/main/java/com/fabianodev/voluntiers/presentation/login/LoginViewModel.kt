@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.data.login.DataResult
+import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
+import com.fabianodev.voluntiers.domain.model.login.LoginFormState
+import com.fabianodev.voluntiers.domain.model.login.LoginResult
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 
@@ -17,7 +20,7 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
+    suspend fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         val result = loginRepository.login(username, password)
 
