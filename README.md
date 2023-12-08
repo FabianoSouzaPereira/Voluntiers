@@ -1,4 +1,9 @@
 # Voluntiers
+![GitHub version](https://img.shields.io/badge/version-v1.0-green)
+![GitHub repo size](https://img.shields.io/github/repo-size/FabianoSouzaPereira/cellsGroup?color=blue)
+![GitHub language count](https://img.shields.io/github/languages/count/FabianoSouzaPereira/cellsGroup?color=red)
+![GitHub top language](https://img.shields.io/github/languages/top/FabianoSouzaPereira/cellsGroup?color=green)</br> 
+
 For Church Volunteers Volunteering is at the heart of the church spirit and we understand the importance of a well-organized and efficient system for empowering our volunteers. The motivation behind this project is to create a centralized platform that simplifies communication, task management and collaboration between our volunteers.
 <br />
 
