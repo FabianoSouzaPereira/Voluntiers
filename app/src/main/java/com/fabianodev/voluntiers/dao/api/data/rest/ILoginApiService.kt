@@ -9,4 +9,7 @@ import retrofit2.http.POST
 interface ILoginApiService {
     @POST("login")
     suspend fun login(@Body loginRequest: LoginRequest): DataResult<LoggedInUser>
+
+    @POST("setLoggedInUser")
+    suspend fun setLoggedInUser(loggedInUser: LoggedInUser)
 }
