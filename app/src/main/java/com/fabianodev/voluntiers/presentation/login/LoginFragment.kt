@@ -14,10 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -100,20 +102,24 @@ class LoginFragment : Fragment() {
         passwordEditText.addTextChangedListener(afterTextChangedListener)
         passwordEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
-                )
+                lifecycleScope.launch {
+                    viewModel.login(
+                        usernameEditText.text.toString(),
+                        passwordEditText.text.toString()
+                    )
+                }
             }
             false
         }
 
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
-            viewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-            )
+            lifecycleScope.launch {
+                viewModel.login(
+                    usernameEditText.text.toString(),
+                    passwordEditText.text.toString()
+                )
+            }
         }
     }
 

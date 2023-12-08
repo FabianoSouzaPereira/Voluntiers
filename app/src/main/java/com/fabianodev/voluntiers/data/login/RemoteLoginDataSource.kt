@@ -16,8 +16,11 @@ class RemoteLoginDataSource @Inject constructor(private val loginApiService: ILo
     override val isLoggedIn: Boolean
         get() = TODO("Not yet implemented")
 
-    override suspend fun login(username: String, password: String): DataResult<LoggedInUser> {
+    override suspend fun logout() {
+        TODO("Not yet implemented")
+    }
 
+    override suspend fun login(username: String, password: String): DataResult<LoggedInUser> {
         // Lógica de autenticação e chamada para o RemoteLoginDataSource
         val result = loginApiService.login(LoginRequest(username, password))
 
@@ -26,11 +29,8 @@ class RemoteLoginDataSource @Inject constructor(private val loginApiService: ILo
         return result
     }
 
-    override suspend fun logout() {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun setLoggedInUser(loggedInUser: LoggedInUser) {
         TODO("Not yet implemented")
     }
+
 }
