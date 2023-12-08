@@ -1,6 +1,6 @@
 package com.fabianodev.voluntiers.di
 
-import com.fabianodev.voluntiers.dao.api.data.rest.ILoginApiService
+import com.fabianodev.voluntiers.dao.api.data.rest.IAuthApiService
 import com.fabianodev.voluntiers.dao.api.data.rest.IUserApiService
 import com.fabianodev.voluntiers.data.home.DefaultHomeRepositoryImpl
 import com.fabianodev.voluntiers.data.login.DefaultLoginRepositoryImpl
@@ -42,12 +42,12 @@ abstract class DataModule {
 
         @Provides
         @Singleton
-        fun provideLoginApiService(): ILoginApiService {
+        fun provideAuthApiService(): IAuthApiService {
             return Retrofit.Builder()
                 .baseUrl("https://example.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(ILoginApiService::class.java)
+                .create(IAuthApiService::class.java)
         }
     }
 }

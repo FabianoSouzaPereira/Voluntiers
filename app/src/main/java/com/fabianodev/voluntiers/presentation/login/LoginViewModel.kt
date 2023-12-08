@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.R
-import com.fabianodev.voluntiers.data.login.DataResult
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
 import com.fabianodev.voluntiers.domain.model.login.LoginFormState
 import com.fabianodev.voluntiers.domain.model.login.LoginResult
@@ -24,8 +23,8 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         // can be launched in a separate asynchronous job
         val result = loginRepository.login(username, password)
 
-        if (result is DataResult.Success) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+        if (result != null) {
+            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.username))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }

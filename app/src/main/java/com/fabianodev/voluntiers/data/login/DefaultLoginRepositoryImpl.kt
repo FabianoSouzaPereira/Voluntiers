@@ -1,41 +1,52 @@
 package com.fabianodev.voluntiers.data.login
 
 import android.content.Context
+import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 
-class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, val dataSource: RemoteLoginDataSource) : LoginRepository {
-    // in-memory cache of the loggedInUser object
-    override var user: LoggedInUser? = null
+class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, private val dataSource: RemoteLoginDataSource) : LoginRepository {
+    /* in-memory cache of the loggedInUser object */
+    override var user: User?
+    override var loggedInUser: LoggedInUser?
 
-    override val isLoggedIn: Boolean
+    override var isLoggedIn: Boolean = false
         get() = user != null
 
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
         user = null
-
+        loggedInUser = null
     }
 
-    override suspend fun logout() {
-        user = null
+    override suspend fun logout(username: String) {
+        user = User(0, "", "")
+        isLoggedIn = false
+        return dataSource.logout(username)
     }
 
-    override suspend fun login(username: String, password: String): DataResult<LoggedInUser> {
-        // handle login
-        val result = dataSource.login(username, password)
+    override suspend fun login(username: String, password: String): User? {
 
-        if (result is DataResult.Success) {
-            setLoggedInUser(result.data)
+        try {
+            val result = dataSource.login(username, password)
+
+            if (result != null) {
+                setLoggedInUser(LoggedInUser(result.id, result.username))
+                return result
+            }
+
+            return user
+        } catch (e: Exception) {
+            print(e.printStackTrace())
+            return user
         }
 
-        return result
     }
 
     override suspend fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
+        this.loggedInUser = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
