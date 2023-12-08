@@ -1,9 +1,10 @@
 package com.fabianodev.voluntiers.data.login
 
 import com.fabianodev.voluntiers.dao.api.data.rest.ILoginApiService
-import com.fabianodev.voluntiers.dao.entities.LoginRequest
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
+import java.io.IOException
+import java.util.UUID
 import javax.inject.Inject
 
 /**
@@ -21,12 +22,13 @@ class RemoteLoginDataSource @Inject constructor(private val loginApiService: ILo
     }
 
     override suspend fun login(username: String, password: String): DataResult<LoggedInUser> {
-        // Lógica de autenticação e chamada para o RemoteLoginDataSource
-        val result = loginApiService.login(LoginRequest(username, password))
-
-        // Tradução do resultado para um formato de domínio, se necessário
-
-        return result
+        return try {
+            // TODO: handle loggedInUser authentication
+            val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Jane Doe")
+            DataResult.Success(fakeUser)
+        } catch (e: Throwable) {
+            DataResult.Error(IOException("Error logging in", e))
+        }
     }
 
     override suspend fun setLoggedInUser(loggedInUser: LoggedInUser) {
