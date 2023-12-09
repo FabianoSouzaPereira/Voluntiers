@@ -1,8 +1,12 @@
 # Voluntiers
+![Static Badge](https://img.shields.io/badge/Jetbrains-1.9-blue?labelColor=green)
+![Static Badge](https://img.shields.io/badge/SDK-34-blue?labelColor=brown)
 ![GitHub version](https://img.shields.io/badge/version-v1.0-green)
 ![GitHub repo size](https://img.shields.io/github/repo-size/FabianoSouzaPereira/Voluntiers?color=blue)
 ![GitHub language count](https://img.shields.io/github/languages/count/FabianoSouzaPereira/Voluntiers??color=red)
-![GitHub top language](https://img.shields.io/github/languages/top/FabianoSouzaPereira/Voluntiers??color=green)</br> 
+![GitHub top language](https://img.shields.io/github/languages/top/FabianoSouzaPereira/Voluntiers??color=green)
+![Static Badge](https://img.shields.io/badge/Coroutine-2.6.2-blue?labelColor=brown)
+![Static Badge](https://img.shields.io/badge/Retofit-2.9.0-blue?labelColor=brown)</br> 
 
 For Church Volunteers Volunteering is at the heart of the church spirit and we understand the importance of a well-organized and efficient system for empowering our volunteers. The motivation behind this project is to create a centralized platform that simplifies communication, task management and collaboration between our volunteers.
 <br />
