@@ -84,5 +84,34 @@ This architecture follows principles of Clean Architecture and/or Hexagonal Arch
 This type of architecture promotes modularity, making it easier to replace or change components without affecting other parts of the system. Additionally, it helps keep business logic independent of implementation details and facilitates unit testing for each layer separately.
 
 
+# Retrofit with Coroutine
+Although the Retrofit API call is happening within a try-catch block, I considered using withContext to ensure that the execution occurs in the appropriate context.
 
-  
+### In ViewModel
+
+   ```kotlin
+        loginButton.setOnClickListener {
+            loadingProgressBar.visibility = View.VISIBLE
+            lifecycleScope.launch {
+                viewModel.login(
+                    usernameEditText.text.toString(),
+                    passwordEditText.text.toString()
+                )
+            }
+        }
+```
+
+
+### In DataModule 
+
+```kotlin
+        @Provides
+        @Singleton
+        fun provideAuthApiService(): IAuthApiService {
+            return Retrofit.Builder()
+                .baseUrl("https://example.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(IAuthApiService::class.java)
+        }
+ ```
