@@ -6,6 +6,8 @@ import com.fabianodev.voluntiers.dao.entities.LogoutRequest
 import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -36,17 +38,20 @@ class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApi
 
     override suspend fun login(username: String, password: String): User? {
         return try {
-            val loginRequest = LoginRequest(username, password)
-            val user = apiService.login(loginRequest)
+            withContext(Dispatchers.IO) {
+                val loginRequest = LoginRequest(username, password)
+                val user = apiService.login(loginRequest)
 
-            if (user.id < 0.toLong()) {
-                setLoggedInUser(LoggedInUser(user.id, user.username))
+                if (user.id < 0.toLong()) {
+                    setLoggedInUser(LoggedInUser(user.id, user.username))
+                }
+                user
             }
-            user
         } catch (e: Throwable) {
-            null
+            throw e
         }
     }
+
 
     override suspend fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.loggedInUser = loggedInUser

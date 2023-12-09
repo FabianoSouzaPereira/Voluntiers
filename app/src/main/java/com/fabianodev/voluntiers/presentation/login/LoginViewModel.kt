@@ -1,6 +1,5 @@
 package com.fabianodev.voluntiers.presentation.login
 
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,10 +7,10 @@ import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
 import com.fabianodev.voluntiers.domain.model.login.LoginFormState
 import com.fabianodev.voluntiers.domain.model.login.LoginResult
-import com.fabianodev.voluntiers.domain.repositories.LoginRepository
+import com.fabianodev.voluntiers.domain.usecase.LoginUseCase
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -20,37 +19,32 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     val loginResult: LiveData<LoginResult> = _loginResult
 
     suspend fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        try {
+            val result = loginUseCase.execute(username, password)
 
-        if (result != null) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.username))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            if (result != null) {
+                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.username))
+            } else {
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
+        } catch (e: IllegalArgumentException) {
+            _loginResult.value = LoginResult(error = R.string.validation_failed)
         }
     }
 
     fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
-        }
+        _loginForm.value = LoginFormState(
+            usernameError = if (!isUserNameValid(username)) R.string.invalid_username else null,
+            passwordError = if (!isPasswordValid(password)) R.string.invalid_password else null,
+            isDataValid = isUserNameValid(username) && isPasswordValid(password)
+        )
     }
 
-    // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains("@")) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
+        return loginUseCase.isUserNameValid(username)
     }
 
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        return loginUseCase.isPasswordValid(password)
     }
 }
