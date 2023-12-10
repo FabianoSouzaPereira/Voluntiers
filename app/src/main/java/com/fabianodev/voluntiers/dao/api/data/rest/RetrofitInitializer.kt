@@ -9,7 +9,7 @@ import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient {
+class RetrofitInitializer {
     private val timeout: Long = Constants.CONNECTTIMEOUT.toLong()
     private val readTimeout: Long = Constants.READTIMEOUT.toLong()
     private val interseptor: RedirectInterceptor = RedirectInterceptor()
@@ -32,9 +32,7 @@ class RetrofitClient {
 
     companion object {
 
-        /** Retorna uma Instância do Client Retrofit para Requisições
-         * @param path Caminho Principal da API
-         */
+        @JvmStatic
         fun getRetrofitInstance(path: String): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(path)
