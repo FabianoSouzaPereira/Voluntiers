@@ -75,14 +75,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-//    /* Dependency for the Firebase */
-//    implementation "com.google.firebase:firebase-analytics-ktx:21.5.0"
-//    implementation "com.google.firebase:firebase-auth-ktx:22.3.0"
-//    implementation "com.google.firebase:firebase-firestore-ktx:24.9.1"
-//    /* Messages in app */
-//    implementation "com.google.firebase:firebase-inappmessaging-ktx:20.4.0"
-//    /* Show in app */
-//    implementation "com.google.firebase:firebase-inappmessaging-ktx:20.4.0"
+    /* Dependency for the Firebase */
+    implementation "com.google.firebase:firebase-analytics-ktx:21.5.0"
+    implementation "com.google.firebase:firebase-auth-ktx:22.3.0"
+    implementation "com.google.firebase:firebase-firestore-ktx:24.10.0"
+    /* Messages in app */
+    implementation "com.google.firebase:firebase-inappmessaging-ktx:20.4.0"
+    /* Show in app */
+    implementation "com.google.firebase:firebase-inappmessaging-display-ktx:20.4.0"
 
     /******** Tests ********/
     testImplementation "junit:junit:4.13.2"

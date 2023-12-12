@@ -2,6 +2,6 @@ package com.fabianodev.voluntiers.data.home
 
 import javax.inject.Inject
 
-class HomeDataSource @Inject constructor() {
+class RemoteHomeDataSource @Inject constructor() {
     fun getContent() {}
 }
