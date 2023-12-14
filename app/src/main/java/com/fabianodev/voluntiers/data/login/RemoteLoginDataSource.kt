@@ -5,6 +5,7 @@ import com.fabianodev.voluntiers.dao.entities.login.LoginRequest
 import com.fabianodev.voluntiers.dao.entities.login.LogoutRequest
 import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,8 +21,6 @@ class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApi
 
     override var loggedInUser: LoggedInUser? = null
 
-    //   private val documentReference = firebaseFirestore.document("data")
-
     override suspend fun logout(username: String) {
         isLoggedIn = false
         user = null
@@ -29,23 +28,19 @@ class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApi
             val logoutRequest = LogoutRequest(username)
             val user = apiService.logout(logoutRequest)
 
-            if (user.id < 0.toLong()) {
-                setLoggedInUser(LoggedInUser(user.id, user.username))
-            }
-
         } catch (e: Throwable) {
             print(e.printStackTrace())
         }
     }
 
-    override suspend fun login(username: String, password: String, returnSecureToken: Boolean): User? {
+    override suspend fun login(username: String, password: String, returnSecureToken: Boolean): SignUpWithPassword.SignUpResponse {
         return try {
             withContext(Dispatchers.IO) {
                 val loginRequest = LoginRequest(username, password, returnSecureToken)
                 val user = apiService.login(loginRequest)
 
-                if (user.id < 0.toLong()) {
-                    setLoggedInUser(LoggedInUser(user.id, user.username))
+                if (user.email.isNotEmpty()) {
+                    setLoggedInUser(LoggedInUser(user.email, user.displayName))
                 }
                 user
             }

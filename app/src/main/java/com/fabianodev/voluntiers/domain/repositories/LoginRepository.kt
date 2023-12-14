@@ -2,6 +2,7 @@ package com.fabianodev.voluntiers.domain.repositories
 
 import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 
 
 /**
@@ -14,6 +15,6 @@ interface LoginRepository {
     var loggedInUser: LoggedInUser?
     var isLoggedIn: Boolean
     suspend fun logout(username: String)
-    suspend fun login(username: String, password: String, returnSecureToken: Boolean = true): User?
+    suspend fun login(username: String, password: String, returnSecureToken: Boolean = true): SignUpWithPassword.SignUpResponse
     suspend fun setLoggedInUser(loggedInUser: LoggedInUser)
 }

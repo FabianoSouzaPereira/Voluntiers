@@ -3,6 +3,7 @@ package com.fabianodev.voluntiers.data.login
 import android.content.Context
 import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 
@@ -27,20 +28,19 @@ class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, priva
         return dataSource.logout(username)
     }
 
-    override suspend fun login(username: String, password: String, returnSecureToken: Boolean): User? {
+    override suspend fun login(username: String, password: String, returnSecureToken: Boolean): SignUpWithPassword.SignUpResponse {
 
         try {
             val result = dataSource.login(username, password, returnSecureToken)
 
-            if (result != null) {
-                setLoggedInUser(LoggedInUser(result.id, result.username))
+            if (result.email.isNotEmpty()) {
+                setLoggedInUser(LoggedInUser(result.email, result.displayName))
                 return result
             }
 
-            return user
+            return result
         } catch (e: Exception) {
-            print(e.printStackTrace())
-            return user
+            throw e
         }
 
     }

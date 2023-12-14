@@ -15,9 +15,7 @@ class RetrofitInitializer {
     private val interseptor: RedirectInterceptor = RedirectInterceptor()
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(interseptor)
         .protocols(Collections.singletonList(Protocol.HTTP_1_1))
-        .followRedirects(false)
         .connectTimeout(timeout, TimeUnit.SECONDS)
         .readTimeout(readTimeout, TimeUnit.SECONDS)
         .build()
@@ -27,14 +25,11 @@ class RetrofitInitializer {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    /** Get a new instance of retrofit */
-    fun userService(): IUserApiService = retrofit.create(IUserApiService::class.java)
-
     companion object {
 
         @JvmStatic
         fun getRetrofitInstance(path: String): Retrofit {
-            return Retrofit.Builder()
+            return Retrofit.Builder().client(RetrofitInitializer().okHttpClient)
                 .baseUrl(path)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -43,7 +38,7 @@ class RetrofitInitializer {
 }
 
 /** This interceptor request to avoid redirect authenticationmodel on 307 by response */
-class RedirectInterceptor : Interceptor {
+open class RedirectInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()

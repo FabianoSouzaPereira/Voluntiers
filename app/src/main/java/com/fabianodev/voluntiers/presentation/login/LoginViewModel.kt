@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
             val result = loginUseCase.execute(username, password, returnSecureToken)
 
             if (result != null) {
-                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.username))
+                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.email))
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }

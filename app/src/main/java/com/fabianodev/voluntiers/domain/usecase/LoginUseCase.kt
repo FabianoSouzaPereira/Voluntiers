@@ -1,13 +1,13 @@
 package com.fabianodev.voluntiers.domain.usecase
 
 import android.util.Patterns
-import com.fabianodev.voluntiers.domain.model.User
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val loginRepository: LoginRepository) {
 
-    suspend fun execute(username: String, password: String, returnSecureToken: Boolean): User? {
+    suspend fun execute(username: String, password: String, returnSecureToken: Boolean): SignUpWithPassword.SignUpResponse? {
         if (!isUserNameValid(username)) {
             throw IllegalArgumentException("Nome de usuário inválido")
         }

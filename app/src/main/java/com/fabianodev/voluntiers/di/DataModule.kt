@@ -10,6 +10,7 @@ import com.fabianodev.voluntiers.data.user.RemoteUserDataSource
 import com.fabianodev.voluntiers.domain.repositories.HomeRepository
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import com.fabianodev.voluntiers.domain.repositories.UserRepository
+import com.fabianodev.voluntiers.utils.Constants.Endpoint.BASE_URL
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -40,19 +41,19 @@ abstract class DataModule {
         @Provides
         @Singleton
         fun provideHomeApiService(retrofitInitializer: RetrofitInitializer.Companion): IHomeApiService {
-            return retrofitInitializer.getRetrofitInstance("https://console.cloud.google.com/apis/library/firebasehosting.googleapis.com?project=voluntiers-4a4ff").create(IHomeApiService::class.java)
+            return retrofitInitializer.getRetrofitInstance(BASE_URL).create(IHomeApiService::class.java)
         }
 
         @Provides
         @Singleton
         fun provideUserApiService(retrofitInitializer: RetrofitInitializer.Companion): IUserApiService {
-            return retrofitInitializer.getRetrofitInstance("https://example.com/api/").create(IUserApiService::class.java)
+            return retrofitInitializer.getRetrofitInstance(BASE_URL).create(IUserApiService::class.java)
         }
 
         @Provides
         @Singleton
         fun provideAuthApiService(retrofitInitializer: RetrofitInitializer.Companion): IAuthApiService {
-            return retrofitInitializer.getRetrofitInstance("https://example.com/api/").create(IAuthApiService::class.java)
+            return retrofitInitializer.getRetrofitInstance(BASE_URL).create(IAuthApiService::class.java)
         }
     }
 }
