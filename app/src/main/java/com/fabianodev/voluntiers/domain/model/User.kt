@@ -1,3 +1,8 @@
 package com.fabianodev.voluntiers.domain.model
 
-data class User(val id: Long, val username: String, val password: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
+data class User(val id: Long, val username: String, val password: String) : Parcelable

@@ -93,8 +93,8 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 viewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username = usernameEditText.text.toString(),
+                    password = passwordEditText.text.toString()
                 )
             }
         }
@@ -104,8 +104,9 @@ class LoginFragment : Fragment() {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 lifecycleScope.launch {
                     viewModel.login(
-                        usernameEditText.text.toString(),
-                        passwordEditText.text.toString()
+                        username = usernameEditText.text.toString(),
+                        password = passwordEditText.text.toString(),
+                        returnSecureToken = true
                     )
                 }
             }
@@ -116,8 +117,9 @@ class LoginFragment : Fragment() {
             loadingProgressBar.visibility = View.VISIBLE
             lifecycleScope.launch {
                 viewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username = usernameEditText.text.toString(),
+                    password = passwordEditText.text.toString(),
+                    returnSecureToken = true
                 )
             }
         }

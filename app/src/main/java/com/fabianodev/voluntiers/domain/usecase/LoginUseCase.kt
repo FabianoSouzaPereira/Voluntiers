@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val loginRepository: LoginRepository) {
 
-    suspend fun execute(username: String, password: String): User? {
+    suspend fun execute(username: String, password: String, returnSecureToken: Boolean): User? {
         if (!isUserNameValid(username)) {
             throw IllegalArgumentException("Nome de usuário inválido")
         }
@@ -17,7 +17,7 @@ class LoginUseCase @Inject constructor(private val loginRepository: LoginReposit
         }
 
         return try {
-            loginRepository.login(username, password)
+            loginRepository.login(username, password, returnSecureToken)
         } catch (e: Throwable) {
             null
         }

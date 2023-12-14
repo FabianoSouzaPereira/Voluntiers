@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "225452467333",
+    "project_id": "voluntiers-4a4ff",
+    "storage_bucket": "voluntiers-4a4ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225452467333:android:11f03d7c66f96eb12475ec",
+        "android_client_info": {
+          "package_name": "com.fabianodev.voluntiers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225452467333-ic7drkbvo0esnll4eh5hotcgdbksdabq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fabianodev.voluntiers",
+            "certificate_hash": "6d47db115195a661bdb2792a0127645f4797bc24"
+          }
+        },
+        {
+          "client_id": "225452467333-mljff412cc71up4lr98hjakom1sb98vj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATLSd5MUNBIBKc2GfeO3XZKJAE3n-2O2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225452467333-mljff412cc71up4lr98hjakom1sb98vj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

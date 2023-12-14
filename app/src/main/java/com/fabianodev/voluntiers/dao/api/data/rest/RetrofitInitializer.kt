@@ -42,7 +42,7 @@ class RetrofitInitializer {
     }
 }
 
-/** This interceptor request to avoid redirect error on 307 by response */
+/** This interceptor request to avoid redirect authenticationmodel on 307 by response */
 class RedirectInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

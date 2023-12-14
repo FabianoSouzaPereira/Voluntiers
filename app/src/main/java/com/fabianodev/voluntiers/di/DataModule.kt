@@ -40,7 +40,7 @@ abstract class DataModule {
         @Provides
         @Singleton
         fun provideHomeApiService(retrofitInitializer: RetrofitInitializer.Companion): IHomeApiService {
-            return retrofitInitializer.getRetrofitInstance("https://example.com/api/").create(IHomeApiService::class.java)
+            return retrofitInitializer.getRetrofitInstance("https://console.cloud.google.com/apis/library/firebasehosting.googleapis.com?project=voluntiers-4a4ff").create(IHomeApiService::class.java)
         }
 
         @Provides

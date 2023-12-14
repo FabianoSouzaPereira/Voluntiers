@@ -2,12 +2,36 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services' version '4.3.15' apply false
+    id 'kotlin-parcelize'
+    id 'com.google.gms.google-services' version '4.3.15'
 }
+
+// Carregando as propriedades do arquivo keystore.properties
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def firebasePropertiesFile = rootProject.file("firebase.properties")
+def firebaseProperties = new Properties()
+firebaseProperties.load(new FileInputStream(firebasePropertiesFile))
+def idClientWeb = firebaseProperties['IDClientWeb']
+def secretKeyWeb = firebaseProperties['SecretKeyWeb']
+def apiWEB = firebaseProperties['ApiWEB']
+def idAPP = firebaseProperties['IDAPP']
+
 
 android {
     namespace 'com.fabianodev.voluntiers'
     compileSdk 34
+
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
 
     defaultConfig {
         applicationId "com.fabianodev.voluntiers"
@@ -23,6 +47,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

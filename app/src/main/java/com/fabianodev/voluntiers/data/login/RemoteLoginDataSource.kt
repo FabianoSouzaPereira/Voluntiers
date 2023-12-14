@@ -1,17 +1,17 @@
 package com.fabianodev.voluntiers.data.login
 
 import com.fabianodev.voluntiers.dao.api.data.rest.IAuthApiService
-import com.fabianodev.voluntiers.dao.entities.LoginRequest
-import com.fabianodev.voluntiers.dao.entities.LogoutRequest
+import com.fabianodev.voluntiers.dao.entities.login.LoginRequest
+import com.fabianodev.voluntiers.dao.entities.login.LogoutRequest
 import com.fabianodev.voluntiers.domain.model.User
-import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
- * Class that handles authentication w/ login credentials and retrieves user information.
+ * Class that handles authenticationmodel w/ login credentials and retrieves user information.
  */
 class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApiService) : LoginRepository {
     override var user: User? = null
@@ -19,6 +19,8 @@ class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApi
         get() = user != null
 
     override var loggedInUser: LoggedInUser? = null
+
+    //   private val documentReference = firebaseFirestore.document("data")
 
     override suspend fun logout(username: String) {
         isLoggedIn = false
@@ -36,10 +38,10 @@ class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApi
         }
     }
 
-    override suspend fun login(username: String, password: String): User? {
+    override suspend fun login(username: String, password: String, returnSecureToken: Boolean): User? {
         return try {
             withContext(Dispatchers.IO) {
-                val loginRequest = LoginRequest(username, password)
+                val loginRequest = LoginRequest(username, password, returnSecureToken)
                 val user = apiService.login(loginRequest)
 
                 if (user.id < 0.toLong()) {

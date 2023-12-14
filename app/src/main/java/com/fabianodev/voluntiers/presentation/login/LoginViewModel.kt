@@ -18,9 +18,9 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    suspend fun login(username: String, password: String) {
+    suspend fun login(username: String, password: String, returnSecureToken: Boolean) {
         try {
-            val result = loginUseCase.execute(username, password)
+            val result = loginUseCase.execute(username, password, returnSecureToken)
 
             if (result != null) {
                 _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.username))

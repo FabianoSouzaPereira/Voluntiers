@@ -1,10 +1,10 @@
 package com.fabianodev.voluntiers.dao.api.data.rest
 
-import com.fabianodev.voluntiers.dao.entities.LoginRequest
-import com.fabianodev.voluntiers.dao.entities.LogoutRequest
+import com.fabianodev.voluntiers.dao.entities.login.LoginRequest
+import com.fabianodev.voluntiers.dao.entities.login.LogoutRequest
 import com.fabianodev.voluntiers.data.login.DataResult
 import com.fabianodev.voluntiers.domain.model.User
-import com.fabianodev.voluntiers.domain.model.login.LoggedInUser
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
 import retrofit2.http.Body
 import retrofit2.http.POST
 
