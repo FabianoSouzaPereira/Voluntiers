@@ -1,0 +1,69 @@
+@startuml
+!define DIAMOND class #99A3A4
+
+package "Dagger Component" {
+    [ApplicationComponent|#Singleton]
+    [Factory|create(applicationComponent: Context): ApplicationComponent]
+    [MainComponent]
+}
+
+package "Dagger Modules" {
+    [DataModule|#Provides]
+    [ViewModelBuilder|#Provides]
+    [SubComponentsModule|#Provides]
+    [SubComponentFirebaseModule|#Provides]
+}
+
+
+[ApplicationComponent|#Singleton] --> [Factory|create(applicationComponent: Context): ApplicationComponent]
+[Factory|create(applicationComponent: Context): ApplicationComponent] --> Context
+[ApplicationComponent|#Singleton] --> "1" MainComponent
+[ApplicationComponent|#Singleton] --> [DataModule]
+[ApplicationComponent|#Singleton] --> [ViewModelBuilder]
+[ApplicationComponent|#Singleton] --> [SubComponentsModule]
+[ApplicationComponent|#Singleton] --> [SubComponentFirebaseModule]
+
+[MainComponent#Module] --> [Factory|create(applicationComponent: Context): ApplicationComponent]
+[Factory|create(applicationComponent: Context): ApplicationComponent] --> [MainComponent#Module]
+[MainComponent#Module] --> [MainActivity]
+[MainComponent#Module] --> [HomeFragment]
+[MainComponent#Module] --> [LoginFragment]
+[MainComponent#Module] --> [RemoteLoginDataSource]
+
+[MainComponent#Module] --> [RemoteLoginDataSource] : @Inject
+[DataModule|#Provides] --> [HomeViewModel] : @Binds, @IntoMap, @IntoMap
+[DataModule|#Provides] --> [LoginViewModel] : @Binds, @IntoMap, @IntoMap
+
+
+@enduml
+
+
+@startuml
+
+class AppModule {
+    // Métodos que fornecem instâncias de objetos
+}
+
+class AppComponent {
+    // Métodos de injeção
+}
+
+class MainActivity {
+    SomeDependency someDependency
+}
+
+class AnotherClass {
+    AnotherDependency anotherDependency
+}
+
+AppModule --> AppComponent : includes
+AppComponent --> MainActivity : injects
+AppComponent --> AnotherClass : injects
+
+@enduml
+
+
+
+
+
+
