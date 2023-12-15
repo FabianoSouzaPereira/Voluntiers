@@ -32,6 +32,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
         }
     }
 
+
     fun loginDataChanged(username: String, password: String) {
         _loginForm.value = LoginFormState(
             usernameError = if (!isUserNameValid(username)) R.string.invalid_username else null,

@@ -23,6 +23,10 @@ class LoginUseCase @Inject constructor(private val loginRepository: LoginReposit
         }
     }
 
+    suspend fun excute() {
+
+    }
+
     fun isUserNameValid(username: String): Boolean {
         return if (username.contains("@")) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
