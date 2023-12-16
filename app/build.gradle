@@ -76,6 +76,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
     implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.navigation}"
+    implementation 'androidx.preference:preference-ktx:1.2.1'
 
     /******** LifeCycle ********/
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.livedataktxVersion}"

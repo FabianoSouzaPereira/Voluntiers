@@ -55,5 +55,7 @@ abstract class DataModule {
         fun provideAuthApiService(retrofitInitializer: RetrofitInitializer.Companion): IAuthApiService {
             return retrofitInitializer.getRetrofitInstance(BASE_URL).create(IAuthApiService::class.java)
         }
+
+
     }
 }

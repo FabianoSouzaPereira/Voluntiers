@@ -1,5 +1,7 @@
 package com.fabianodev.voluntiers.presentation.login
 
+
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +9,13 @@ import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
 import com.fabianodev.voluntiers.domain.model.login.LoginFormState
 import com.fabianodev.voluntiers.domain.model.login.LoginResult
+import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 import com.fabianodev.voluntiers.domain.usecase.LoginUseCase
+import com.fabianodev.voluntiers.utils.PreferenceManager
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase) : ViewModel() {
-
+class LoginViewModel @Inject constructor(context: Context, private val loginUseCase: LoginUseCase) : ViewModel() {
+    val preferenceManager: PreferenceManager = PreferenceManager(context)
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -20,10 +24,11 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
 
     suspend fun login(username: String, password: String, returnSecureToken: Boolean) {
         try {
-            val result = loginUseCase.execute(username, password, returnSecureToken)
+            val result: SignUpWithPassword.SignUpResponse? = loginUseCase.execute(username, password, returnSecureToken)
 
             if (result != null) {
                 _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.email))
+                preferenceManager.savePreferenceString("token", result.idToken)
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }

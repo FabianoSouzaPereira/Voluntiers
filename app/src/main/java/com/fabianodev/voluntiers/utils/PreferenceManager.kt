@@ -1,10 +1,31 @@
 package com.fabianodev.voluntiers.utils
 
+import android.content.Context
 import android.content.SharedPreferences
 
-class PreferenceManager(private val preferences: SharedPreferences) {
-
+class PreferenceManager(context: Context) {
+    private val preferences: SharedPreferences = context.getSharedPreferences("Preferences", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = preferences.edit()
+
+    /**
+     * Manages the storage of a string preference in SharedPreferences.
+     * @param key The key associated with the preference.
+     * @param value The string value to be saved.
+     */
+    fun savePreferenceString(key: String, value: String) {
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+    /**
+     * Retrieves a string preference from SharedPreferences.
+     * @param key The key associated with the preference.
+     * @param defaultValue The default value to return if the preference does not exist.
+     * @return The string value associated with the key, or the default value if not found.
+     */
+    fun getPreferenceString(key: String, defaultValue: String): String {
+        return preferences.getString(key, defaultValue) ?: defaultValue
+    }
 
     /**
      * Manages the storage of an integer preference in SharedPreferences.
