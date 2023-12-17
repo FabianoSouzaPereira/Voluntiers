@@ -13,7 +13,7 @@ import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWi
 interface LoginRepository {
     var user: User?
     var loggedInUser: LoggedInUser?
-    var isLoggedIn: Boolean
+    val isLoggedIn: Boolean
     suspend fun logout(username: String)
     suspend fun login(username: String, password: String, returnSecureToken: Boolean = true): SignUpWithPassword.SignUpResponse
     suspend fun setLoggedInUser(loggedInUser: LoggedInUser)

@@ -16,13 +16,12 @@ import javax.inject.Inject
  */
 class RemoteLoginDataSource @Inject constructor(private val apiService: IAuthApiService) : LoginRepository {
     override var user: User? = null
-    override var isLoggedIn: Boolean = false
+    override val isLoggedIn: Boolean
         get() = user != null
 
     override var loggedInUser: LoggedInUser? = null
 
     override suspend fun logout(username: String) {
-        isLoggedIn = false
         user = null
         try {
             val logoutRequest = LogoutRequest(username)

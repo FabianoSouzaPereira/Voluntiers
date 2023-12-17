@@ -9,4 +9,6 @@ class Shared {
     init {
         instance = this
     }
+
+    var isLoggedIn: Boolean = false
 }

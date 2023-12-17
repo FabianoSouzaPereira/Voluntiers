@@ -31,7 +31,7 @@ abstract class DataModule {
     @Binds
     abstract fun bindLoginRepository(repository: DefaultLoginRepositoryImpl): LoginRepository
 
-    companion object {
+    companion object DataModuleObject {
         @Provides
         @Singleton
         fun provideRetrofitInitializer(): RetrofitInitializer.Companion {
@@ -55,7 +55,5 @@ abstract class DataModule {
         fun provideAuthApiService(retrofitInitializer: RetrofitInitializer.Companion): IAuthApiService {
             return retrofitInitializer.getRetrofitInstance(BASE_URL).create(IAuthApiService::class.java)
         }
-
-
     }
 }

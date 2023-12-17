@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
@@ -30,10 +32,10 @@ class LoginFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
@@ -42,19 +44,17 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val usernameEditText = binding.username
         val passwordEditText = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
+
 
         viewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -79,6 +79,7 @@ class LoginFragment : Fragment() {
                 }
                 loginResult.success?.let {
                     updateUiWithUser(it)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
             })
 
@@ -130,6 +131,7 @@ class LoginFragment : Fragment() {
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

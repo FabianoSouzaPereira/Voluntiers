@@ -12,7 +12,7 @@ class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, priva
     override var user: User?
     override var loggedInUser: LoggedInUser?
 
-    override var isLoggedIn: Boolean = false
+    override val isLoggedIn: Boolean
         get() = user != null
 
     init {
@@ -23,8 +23,7 @@ class DefaultLoginRepositoryImpl @Inject constructor(val context: Context, priva
     }
 
     override suspend fun logout(username: String) {
-        user = User(0, "", "")
-        isLoggedIn = false
+        user = null
         return dataSource.logout(username)
     }
 
