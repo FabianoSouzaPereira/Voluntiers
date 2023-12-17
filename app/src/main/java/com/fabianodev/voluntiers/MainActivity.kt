@@ -10,8 +10,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     lateinit var mainComponent: MainComponent
-    // private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         mainComponent =
             (applicationContext as AppApplication).appComponent.mainComponent().create()
@@ -19,7 +17,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
     }
 }
