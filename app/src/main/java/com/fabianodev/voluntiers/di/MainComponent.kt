@@ -4,6 +4,7 @@ import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.data.login.RemoteLoginDataSource
 import com.fabianodev.voluntiers.presentation.home.HomeFragment
 import com.fabianodev.voluntiers.presentation.login.LoginFragment
+import com.fabianodev.voluntiers.presentation.main.MainFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainModule::class])
@@ -19,5 +20,6 @@ interface MainComponent {
     fun inject(fragment: LoginFragment)
     fun inject(remoteLoginDataSource: RemoteLoginDataSource)
 
+    fun inject(fragment: MainFragment)
 
 }

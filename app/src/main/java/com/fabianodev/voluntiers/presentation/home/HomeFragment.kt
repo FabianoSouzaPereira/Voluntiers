@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.fabianodev.voluntiers.MainActivity
+import com.fabianodev.voluntiers.AppApplication
 import com.fabianodev.voluntiers.databinding.FragmentHomeBinding
 import javax.inject.Inject
 
@@ -18,14 +18,13 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent.inject(this)
+        (requireActivity().applicationContext as AppApplication).appComponent.mainComponent().create()
     }
 
     override fun onCreateView(

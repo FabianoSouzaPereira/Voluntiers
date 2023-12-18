@@ -15,9 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.fabianodev.voluntiers.MainActivity
+import com.fabianodev.voluntiers.AppApplication
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
@@ -32,11 +31,10 @@ class LoginFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent.inject(this)
+        (requireActivity().applicationContext as AppApplication).appComponent.mainComponent().create()
     }
 
     override fun onCreateView(
