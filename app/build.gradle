@@ -67,10 +67,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.fragment:fragment:1.6.2'
-    def lifecycle_version = '2.7.0-rc01'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    def lifecycle_version = '2.7.0-rc01'
     implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
     implementation "com.google.android.material:material:${rootProject.ext.materialVersion}"
@@ -115,8 +115,7 @@ dependencies {
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-    implementation "com.google.android.material:material:1.10.0"
-    implementation "androidx.annotation:annotation:1.7.0"
+    implementation "androidx.annotation:annotation:1.7.1"
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:2.2.0"
     implementation 'org.robolectric:robolectric:4.11.1'

@@ -12,4 +12,7 @@
     <string name="validation_failed">Validation fail</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_fragment">Main Fragment</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="logo">Logo</string>
 </resources>

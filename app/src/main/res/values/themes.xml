@@ -1,9 +1,20 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.Voluntiers" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">@color/black</item>-->
+        <!-- Customize Style to EditText -->
+        <item name="editTextBackground">@style/EditTextRounded</item>
     </style>
 
     <style name="Theme.Voluntiers" parent="Base.Theme.Voluntiers" />
+
+    <!-- Customize Style to EditText -->
+    <style name="EditTextRounded">
+        <item name="android:background">@drawable/rounded_edittext_bg</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/rounded_button_bg</item>
+    </style>
 </resources>

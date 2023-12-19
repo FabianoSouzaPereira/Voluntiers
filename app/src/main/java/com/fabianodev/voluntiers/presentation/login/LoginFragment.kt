@@ -1,6 +1,7 @@
 package com.fabianodev.voluntiers.presentation.login
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,18 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.fabianodev.voluntiers.AppApplication
+import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentLoginBinding
 import com.fabianodev.voluntiers.domain.model.login.LoggedInUserView
+import com.fabianodev.voluntiers.utils.ButtonUtil
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,10 +37,14 @@ class LoginFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    lateinit var usernameEditText: EditText
+    lateinit var passwordEditText: EditText
+    lateinit var loginButton: Button
+    lateinit var loadingProgressBar: ProgressBar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().applicationContext as AppApplication).appComponent.mainComponent().create()
+        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -48,13 +58,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val usernameEditText = binding.username
-        val passwordEditText = binding.password
-        val loginButton = binding.login
-        val loadingProgressBar = binding.loading
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        usernameEditText = binding.username
+        passwordEditText = binding.password
+        loginButton = binding.login
+        loadingProgressBar = binding.loading
 
+        setupButton(loginButton)
 
-        viewModel.loginFormState.observe(viewLifecycleOwner,
+        viewModel.loginFormState.observe(
+            viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
@@ -77,7 +90,8 @@ class LoginFragment : Fragment() {
                 }
                 loginResult.success?.let {
                     updateUiWithUser(it)
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    val navController = findNavController()
+                    navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
             })
 
@@ -124,12 +138,14 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun setupButton(loginButton: Button) {
+        ButtonUtil.setGradient(button = loginButton, textColor = Color.WHITE, buttonState = ButtonUtil.Companion.ButtonState.DEFAULT, radius = 20f)
+    }
+
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome) + model.displayName
-        // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
@@ -140,5 +156,7 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModel.loginFormState.removeObservers(viewLifecycleOwner)
+        viewModel.loginResult.removeObservers(viewLifecycleOwner)
     }
 }

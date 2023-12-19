@@ -15,7 +15,7 @@ import com.fabianodev.voluntiers.utils.PreferenceManager
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(context: Context, private val loginUseCase: LoginUseCase) : ViewModel() {
-    val preferenceManager: PreferenceManager = PreferenceManager(context)
+    private val preferenceManager: PreferenceManager = PreferenceManager(context)
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 

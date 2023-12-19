@@ -1,3 +1,19 @@
+/*
+ * Author: Fabiano Pereira
+ *
+ * This class, PreferenceManager, is designed to simplify the usage of SharedPreferences in Android applications.
+ * It provides methods for storing and retrieving values of various data types such as String, Int, Boolean,
+ * Long, Float, and Set<String> in SharedPreferences.
+ *
+ * Valid data types for this class:
+ * - String
+ * - Int
+ * - Boolean
+ * - Long
+ * - Float
+ * - Set<String>
+ */
+
 package com.fabianodev.voluntiers.utils
 
 import android.content.Context

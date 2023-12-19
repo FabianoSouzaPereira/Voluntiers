@@ -2,7 +2,6 @@ package com.fabianodev.voluntiers.utils
 
 import androidx.annotation.Keep
 
-@Suppress("MemberVisibilityCanBePrivate")
 object Constants {
     @Keep
     const val API_SERVER_NAME = "https://console.cloud.google.com/v1/"

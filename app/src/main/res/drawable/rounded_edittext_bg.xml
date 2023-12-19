@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!-- rounded_button_bg.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/white" />
+    <size android:height="@dimen/edittext_height" />
+    <padding android:left="@dimen/dimen_left" />
+    <padding android:top="@dimen/dimen_top" />
+    <padding android:right="@dimen/dimen_right" />
+    <padding android:bottom="@dimen/dimen_down" />
+    <corners android:radius="18dp" />
+    <stroke android:color="@color/cardview_dark_background" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/strokcolor" />
+</shape>
