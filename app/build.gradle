@@ -64,13 +64,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
+    def lifecycle_version = '2.7.0-rc01'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment-ktx:1.6.2'
-    def lifecycle_version = '2.7.0-rc01'
     implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
     implementation "com.google.android.material:material:${rootProject.ext.materialVersion}"
@@ -112,12 +120,13 @@ dependencies {
     implementation "com.google.firebase:firebase-inappmessaging-display-ktx:20.4.0"
 
     /******** Tests ********/
-    testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-    implementation "androidx.annotation:annotation:1.7.1"
-    // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:2.2.0"
-    implementation 'org.robolectric:robolectric:4.11.1'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.7.2"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-runner:1.7.2"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-foundation:1.7.2"
+    testImplementation "org.robolectric:robolectric:4.11.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
+    testImplementation "io.mockk:mockk:1.12.0"
 }
