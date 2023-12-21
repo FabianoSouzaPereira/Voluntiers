@@ -1,11 +1,12 @@
 package com.fabianodev.voluntiers.domain.usecase
 
-import android.util.Patterns
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
+import com.fabianodev.voluntiers.utils.EmailValidator
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(private val loginRepository: LoginRepository) {
+
+class LoginUseCase @Inject constructor(private val emailValidator: EmailValidator, private val loginRepository: LoginRepository) {
 
     suspend fun execute(username: String, password: String, returnSecureToken: Boolean): SignUpWithPassword.SignUpResponse? {
         if (!isUserNameValid(username)) {
@@ -24,11 +25,11 @@ class LoginUseCase @Inject constructor(private val loginRepository: LoginReposit
     }
 
     fun isUserNameValid(username: String): Boolean {
-        return if (username.contains("@")) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
+        return emailValidator.isValidEmail(username)
+    }
+
+    fun isNotBlank(username: String): Boolean {
+        return emailValidator.isNoBlank(username)
     }
 
     fun isPasswordValid(password: String): Boolean {
