@@ -129,4 +129,9 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.11.1"
     testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
     testImplementation "io.mockk:mockk:1.12.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
+    /* Depended od android component */
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+
+
 }
