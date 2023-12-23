@@ -28,7 +28,7 @@ ext {
     androidx_archVerson = '2.2.0'
     preferencektxVersion = '1.2.1'
     retrofit2Version = '2.9.0'
-    dagger2Version = '2.4.9'
+    dagger2Version = '2.49'
     legacy_support_v4Version = '1.0.0'
     preference_ktxVersion = '1.2.1'
     firebase_analytics_ktxVersion = '21.5.0'
@@ -159,6 +159,8 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockkVersion"
     testImplementation "io.mockk:mockk-android:$mockkVersion"
     testImplementation "io.mockk:mockk-agent:$mockkVersion"
+    androidTestImplementation "io.mockk:mockk-android:${mockkVersion}"
+    androidTestImplementation "io.mockk:mockk-agent:${mockkVersion}"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$mannodermaus_junit5Version"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:$mannodermaus_junit5Version"
     androidTestImplementation "de.mannodermaus.junit5:android-test-runner:$mannodermaus_junit5Version"
