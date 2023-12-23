@@ -7,6 +7,38 @@ plugins {
     id 'com.google.gms.google-services' version '4.3.15'
 }
 
+ext {
+    mockkVersion = '1.12.0'
+    corektxVersion = '1.12.0'
+    appcompatVersion = '1.6.1'
+    constraintlayoutVersion = '2.1.4'
+    navigation = '2.7.5'
+    navigationUIktxVersion = '2.5.2'
+    livedataktxVersion = '2.6.2'
+    viewmodelktxVersion = '2.6.2'
+    runtimektxVersion = '2.6.2'
+    materialVersion = '1.10.0'
+    annotationVersion = '1.5.0'
+    retrofitVersion = '2.9.0'
+    convertergsonVersion = '2.9.0'
+    lifecycle_version = '2.7.0-rc01'
+    jUnit5Version = '5.8.1'
+    robolectricVersion = '4.11.1'
+    mannodermaus_junit5Version = '1.7.2'
+    androidx_archVerson = '2.2.0'
+    preferencektxVersion = '1.2.1'
+    retrofit2Version = '2.9.0'
+    dagger2Version = '2.4.9'
+    legacy_support_v4Version = '1.0.0'
+    preference_ktxVersion = '1.2.1'
+    firebase_analytics_ktxVersion = '21.5.0'
+    firebase_auth_ktxVersion = '22.3.0'
+    firebase_firestore_ktxVersion = '24.10.0'
+    firebase_inappmessaging_ktxVersion = '20.4.0'
+    firebase_inappmessaging_display_ktxVersion = '20.4.0'
+    shimmerVersion = '0.5.0'
+}
+
 // Carregando as propriedades do arquivo keystore.properties
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -74,23 +106,22 @@ android {
 }
 
 dependencies {
-    def lifecycle_version = '2.7.0-rc01'
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.fragment:fragment-ktx:1.6.2'
-    implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
-    implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
-    implementation "com.google.android.material:material:${rootProject.ext.materialVersion}"
-    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
-    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.navigation}"
-    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.navigation}"
-    implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_support_v4Version"
+    implementation "androidx.fragment:fragment-ktx:$preferencektxVersion"
+    implementation "androidx.core:core-ktx:$corektxVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    implementation "androidx.preference:preference-ktx:$preference_ktxVersion"
 
     /******** LifeCycle ********/
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.livedataktxVersion}"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.ext.viewmodelktxVersion}"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.ext.runtimektxVersion}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataktxVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodelktxVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$runtimektxVersion"
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     // optional - helpers for implementing LifecycleOwner in a Service
@@ -101,37 +132,37 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     /******** DAGGER ********/
-    implementation 'com.google.dagger:dagger:2.49'
-    kapt 'com.google.dagger:dagger-compiler:2.49'
+    implementation "com.google.dagger:dagger:$dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
 
-    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
 
     /** Retrofit  **/
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
 
     /* Dependency for the Firebase */
-    implementation "com.google.firebase:firebase-analytics-ktx:21.5.0"
-    implementation "com.google.firebase:firebase-auth-ktx:22.3.0"
-    implementation "com.google.firebase:firebase-firestore-ktx:24.10.0"
+    implementation "com.google.firebase:firebase-analytics-ktx:$firebase_analytics_ktxVersion"
+    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_ktxVersion"
+    implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_ktxVersion"
     /* Messages in app */
-    implementation "com.google.firebase:firebase-inappmessaging-ktx:20.4.0"
+    implementation "com.google.firebase:firebase-inappmessaging-ktx:$firebase_inappmessaging_ktxVersion"
     /* Show in app */
-    implementation "com.google.firebase:firebase-inappmessaging-display-ktx:20.4.0"
+    implementation "com.google.firebase:firebase-inappmessaging-display-ktx:$firebase_inappmessaging_display_ktxVersion"
 
     /******** Tests ********/
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
-    androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.7.2"
-    androidTestImplementation "de.mannodermaus.junit5:android-test-runner:1.7.2"
-    androidTestImplementation "de.mannodermaus.junit5:android-test-foundation:1.7.2"
-    testImplementation "org.robolectric:robolectric:4.11.1"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
-    testImplementation "io.mockk:mockk:1.12.0"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
+    testImplementation "org.junit.jupiter:junit-jupiter:$jUnit5Version"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnit5Version"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$jUnit5Version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnit5Version"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "io.mockk:mockk-android:$mockkVersion"
+    testImplementation "io.mockk:mockk-agent:$mockkVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$mannodermaus_junit5Version"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-core:$mannodermaus_junit5Version"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-runner:$mannodermaus_junit5Version"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-foundation:$mannodermaus_junit5Version"
     /* Depended od android component */
-    testImplementation "androidx.arch.core:core-testing:2.2.0"
-
-
+    testImplementation "androidx.arch.core:core-testing:$androidx_archVerson"
 }
