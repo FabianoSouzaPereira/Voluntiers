@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.fabianodev.voluntiers.AppApplication
+import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.databinding.FragmentHomeBinding
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().applicationContext as AppApplication).appComponent.mainComponent().create()
+        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
     override fun onCreateView(

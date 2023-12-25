@@ -18,12 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            val fragment = MainFragment()
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.nav_host_fragment, fragment)
-                .commit()
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.nav_host_fragment, MainFragment())
+            .commit()
     }
 }
