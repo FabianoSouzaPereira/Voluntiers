@@ -24,6 +24,14 @@ class PreferenceManager(context: Context) {
     private val editor: SharedPreferences.Editor = preferences.edit()
 
     /**
+     *   Return a instance os SharedPreferences.
+     *   @return preferences that has context.getSharedPreferences("Preferences", Context.MODE_PRIVATE).
+     */
+    fun getPreferencesInstance(): SharedPreferences {
+        return preferences
+    }
+
+    /**
      * Manages the storage of a string preference in SharedPreferences.
      * @param key The key associated with the preference.
      * @param value The string value to be saved.

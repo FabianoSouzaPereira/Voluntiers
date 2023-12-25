@@ -9,9 +9,11 @@ import com.fabianodev.voluntiers.presentation.main.MainFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var mainComponent: MainComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         mainComponent =
             (applicationContext as AppApplication).appComponent.mainComponent().create()
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

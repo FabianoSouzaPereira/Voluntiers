@@ -159,4 +159,5 @@ class LoginFragment : Fragment() {
         viewModel.loginFormState.removeObservers(viewLifecycleOwner)
         viewModel.loginResult.removeObservers(viewLifecycleOwner)
     }
+
 }

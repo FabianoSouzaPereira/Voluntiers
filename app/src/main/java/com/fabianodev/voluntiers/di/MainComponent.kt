@@ -19,7 +19,6 @@ interface MainComponent {
     fun inject(fragment: HomeFragment)
     fun inject(fragment: LoginFragment)
     fun inject(remoteLoginDataSource: RemoteLoginDataSource)
-
     fun inject(fragment: MainFragment)
 
 }

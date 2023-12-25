@@ -1,3 +1,4 @@
+// settings.gradle specifying the structure of your multi-module project and including individual modules.
 pluginManagement {
     repositories {
         google()
