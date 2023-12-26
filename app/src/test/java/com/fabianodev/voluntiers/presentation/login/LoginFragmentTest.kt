@@ -2,6 +2,7 @@ package com.fabianodev.voluntiers.presentation.login
 
 import android.content.Context
 import io.mockk.MockKAnnotations
+import io.mockk.unmockkAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -18,6 +19,7 @@ class LoginFragmentTest {
 
     @AfterEach
     fun tearDown() {
+        unmockkAll()
     }
 
 
