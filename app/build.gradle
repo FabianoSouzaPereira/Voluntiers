@@ -143,6 +143,7 @@ dependencies {
 
     /******** DAGGER ********/
     implementation "com.google.dagger:dagger:$dagger2Version"
+    implementation 'androidx.preference:preference:1.2.1'
     kapt "com.google.dagger:dagger-compiler:$dagger2Version"
 
     implementation "com.facebook.shimmer:shimmer:$shimmerVersion"

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.databinding.FragmentHomeBinding
 import javax.inject.Inject
@@ -20,7 +19,6 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -28,8 +26,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
