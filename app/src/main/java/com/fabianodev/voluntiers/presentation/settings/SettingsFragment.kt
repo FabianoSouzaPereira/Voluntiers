@@ -1,8 +1,10 @@
-package com.fabianodev.voluntiers
+package com.fabianodev.voluntiers.presentation.settings
 
 import android.content.Context
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.fabianodev.voluntiers.MainActivity
+import com.fabianodev.voluntiers.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

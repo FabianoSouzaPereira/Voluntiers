@@ -1,11 +1,11 @@
 package com.fabianodev.voluntiers.di
 
 import com.fabianodev.voluntiers.MainActivity
-import com.fabianodev.voluntiers.SettingsFragment
 import com.fabianodev.voluntiers.data.login.RemoteLoginDataSource
 import com.fabianodev.voluntiers.presentation.home.HomeFragment
 import com.fabianodev.voluntiers.presentation.login.LoginFragment
 import com.fabianodev.voluntiers.presentation.main.MainFragment
+import com.fabianodev.voluntiers.presentation.settings.SettingsFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainModule::class])
