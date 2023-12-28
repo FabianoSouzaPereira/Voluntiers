@@ -68,6 +68,11 @@ class MainActivity : AppCompatActivity(), MenuProvider {
                 true
             }
 
+            R.id.user -> {
+                navController?.navigate(R.id.userFragment)
+                true
+            }
+
             R.id.logout -> {
                 true
             }

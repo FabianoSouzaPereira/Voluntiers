@@ -14,6 +14,9 @@
         android:id="@+id/login"
         android:title="@string/login" />
     <item
+        android:id="@+id/user"
+        android:title="@string/user" />
+    <item
         android:id="@+id/help"
         android:title="@string/help" />
     <group
