@@ -1,8 +1,8 @@
 package com.fabianodev.voluntiers
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -29,14 +29,24 @@ class MainActivity : AppCompatActivity(), MenuProvider {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val toolbar = binding.toolbar
-        toolbar.setBackgroundColor(Color.BLUE)
+        toolbar.setBackgroundColor(Color.BLACK)
         setSupportActionBar(binding.toolbar)
+        val actionBar = supportActionBar
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+        window.navigationBarColor = Color.BLACK
+        window.statusBarColor = Color.BLACK
+
         addMenuProvider(this)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment?.navController
 
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            //todo something
+        }
+
         NavigationUI.setupActionBarWithNavController(this, navController!!)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         navController = findNavController(R.id.nav_host_fragment)
@@ -44,18 +54,19 @@ class MainActivity : AppCompatActivity(), MenuProvider {
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        Log.d("MenuDebug", "onCreateMenu")
         menuInflater.inflate(R.menu.main_menu, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        Log.d("MenuDebug", "onMenuItemSelected")
-
         if (navController == null) {
             return false
         }
-
         return when (menuItem.itemId) {
+            R.id.mainFragment -> {
+                navController?.navigate(R.id.mainFragment)
+                true
+            }
+
             R.id.home -> {
                 navController?.navigate(R.id.homeFragment)
                 true

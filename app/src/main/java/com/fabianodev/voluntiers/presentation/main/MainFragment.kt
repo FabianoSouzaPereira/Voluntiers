@@ -32,9 +32,9 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("TEST $token")
-        if (token.isNotEmpty()) {
-            findNavController().navigate(R.id.homeFragment)
-        }
+//        if (token.isNotEmpty()) {
+//            findNavController().navigate(R.id.homeFragment)
+//        }
     }
 
     override fun onCreateView(

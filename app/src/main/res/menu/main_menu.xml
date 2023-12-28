@@ -3,7 +3,8 @@
 
     <item
         android:id="@+id/main"
-        android:title="@string/main" />
+        android:title="@string/main"
+        android:visible="false" />
     <item
         android:id="@+id/home"
         android:title="@string/home" />
