@@ -1,5 +1,6 @@
 package com.fabianodev.voluntiers
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity(), MenuProvider {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val toolbar = binding.toolbar
+        toolbar.setBackgroundColor(Color.BLUE)
         setSupportActionBar(binding.toolbar)
         addMenuProvider(this)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
