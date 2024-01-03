@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
@@ -31,4 +32,21 @@ class UserFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.userResult.observe(viewLifecycleOwner,
+                Observer { userResult ->
+                    userResult ?: return@Observer
+                    userResult.error?.let { /* TODO Something */ }
+                    userResult.success?.let { /* TODO Something */ }
+                })
+
+        viewModel.userFormState.observe(viewLifecycleOwner,
+                Observer { userFormState ->
+                    userFormState ?: return@Observer
+                    userFormState.UserFormStateError?.let { /* TODO Something */ }
+                    userFormState.UserFormStaterSuccess?.let { /* TODO Something */ }
+                })
+    }
 }

@@ -1,9 +1,9 @@
 package com.fabianodev.voluntiers.data.login
 
 import android.content.Context
-import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
+import com.fabianodev.voluntiers.domain.model.user.User
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import javax.inject.Inject
 

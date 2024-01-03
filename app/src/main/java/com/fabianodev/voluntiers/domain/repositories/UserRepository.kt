@@ -1,7 +1,7 @@
 package com.fabianodev.voluntiers.domain.repositories
 
-import com.fabianodev.voluntiers.domain.model.User
+import com.fabianodev.voluntiers.domain.model.user.User
 
 interface UserRepository {
-    suspend fun getUserById(userId: String): User?
+    suspend fun getUserById(userId: String): Result<User?>
 }

@@ -1,6 +1,6 @@
 package com.fabianodev.voluntiers.dao.api.data.rest
 
-import com.fabianodev.voluntiers.domain.model.User
+import com.fabianodev.voluntiers.domain.model.user.User
 import retrofit2.http.GET
 import retrofit2.http.Path
 

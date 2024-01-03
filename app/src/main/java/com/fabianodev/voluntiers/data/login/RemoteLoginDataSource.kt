@@ -3,9 +3,9 @@ package com.fabianodev.voluntiers.data.login
 import com.fabianodev.voluntiers.dao.api.data.rest.IAuthApiService
 import com.fabianodev.voluntiers.dao.entities.login.LoginRequest
 import com.fabianodev.voluntiers.dao.entities.login.LogoutRequest
-import com.fabianodev.voluntiers.domain.model.User
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.LoggedInUser
 import com.fabianodev.voluntiers.domain.model.login.authenticationmodel.SignUpWithPassword
+import com.fabianodev.voluntiers.domain.model.user.User
 import com.fabianodev.voluntiers.domain.repositories.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
