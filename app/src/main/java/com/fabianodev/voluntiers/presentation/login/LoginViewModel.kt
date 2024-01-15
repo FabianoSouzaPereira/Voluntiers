@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(context: Context, private val loginUseC
             val result: SignUpWithPassword.SignUpResponse? = loginUseCase.execute(username, password, returnSecureToken)
 
             if (result != null) {
-                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.email))
+                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.displayName))
                 preferenceManager.savePreferenceString("token", result.idToken)
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
@@ -40,9 +40,9 @@ class LoginViewModel @Inject constructor(context: Context, private val loginUseC
 
     fun loginDataChanged(username: String, password: String) {
         _loginForm.value = LoginFormState(
-            usernameError = if (!isUserNameValid(username)) R.string.invalid_username else null,
-            passwordError = if (!isPasswordValid(password)) R.string.invalid_password else null,
-            isDataValid = isUserNameValid(username) && isPasswordValid(password)
+                usernameError = if (!isUserNameValid(username)) R.string.invalid_username else null,
+                passwordError = if (!isPasswordValid(password)) R.string.invalid_password else null,
+                isDataValid = isUserNameValid(username) && isPasswordValid(password)
         )
     }
 

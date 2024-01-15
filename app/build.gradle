@@ -103,14 +103,12 @@ android {
         unitTests.all {
             testLogging {
                 events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen { false }
+                /* considerar as tarefas de teste como desatualizadas */
+                outputs.upToDateWhen { true }
+                /* output default (println, etc.) it'll be showed */
                 showStandardStreams = true
             }
             useJUnitPlatform()
-            testLogging {
-                showStandardStreams = true
-            }
-
         }
     }
 }
@@ -167,13 +165,15 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params:$jUnit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$jUnit5Version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:$jUnit5kotlin"
-    testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "io.mockk:mockk:$mockkVersion"
     testImplementation "io.mockk:mockk-android:$mockkVersion"
     testImplementation "io.mockk:mockk-agent:$mockkVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$mannodermaus_junit5Version"
+    /****  AndroidTestImplementation  *****/
+    androidTestImplementation "org.robolectric:robolectric:$robolectricVersion"
     androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
     androidTestImplementation "io.mockk:mockk-agent:$mockkVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$mannodermaus_junit5Version"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:$mannodermaus_junit5Version"
     androidTestImplementation "de.mannodermaus.junit5:android-test-runner:$mannodermaus_junit5Version"
     androidTestImplementation "de.mannodermaus.junit5:android-test-foundation:$mannodermaus_junit5Version"

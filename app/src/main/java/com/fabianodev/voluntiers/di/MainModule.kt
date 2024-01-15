@@ -3,6 +3,7 @@ package com.fabianodev.voluntiers.di
 import androidx.lifecycle.ViewModel
 import com.fabianodev.voluntiers.presentation.home.HomeViewModel
 import com.fabianodev.voluntiers.presentation.login.LoginViewModel
+import com.fabianodev.voluntiers.presentation.user.UserViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,4 +20,9 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserViewModel::class)
+    fun bindUserViewModel(viewModel: UserViewModel): ViewModel
 }

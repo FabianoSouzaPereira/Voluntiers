@@ -14,7 +14,6 @@ class LoginFragmentTest {
     @BeforeEach
     fun setup() {
         MockKAnnotations.init(this)
-
     }
 
     @AfterEach
@@ -51,31 +50,4 @@ class LoginFragmentTest {
     fun getLoginButton() {
     }
 
-    @Test
-    fun setLoginButton() {
-    }
-
-    @Test
-    fun getLoadingProgressBar() {
-    }
-
-    @Test
-    fun setLoadingProgressBar() {
-    }
-
-    @Test
-    fun onAttach() {
-    }
-
-    @Test
-    fun onCreateView() {
-    }
-
-    @Test
-    fun onViewCreated() {
-    }
-
-    @Test
-    fun onDestroyView() {
-    }
 }

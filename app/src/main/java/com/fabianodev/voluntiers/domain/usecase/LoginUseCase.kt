@@ -10,6 +10,7 @@ class LoginUseCase @Inject constructor(private val emailValidator: EmailValidato
 
     suspend fun execute(username: String, password: String, returnSecureToken: Boolean): SignUpWithPassword.SignUpResponse? {
         if (!isUserNameValid(username)) {
+            println(" Execução: !isUserNameValid(username) in LoginUseCase.execute Return  throw IllegalArgumentException(\"Nome de usuário inválido\")")
             throw IllegalArgumentException("Nome de usuário inválido")
         }
 
