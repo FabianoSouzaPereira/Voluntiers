@@ -9,4 +9,10 @@
     <dimen name="dimen_right">12dp</dimen>
     <dimen name="dimen_down">12dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="task_item_padding">8dp</dimen>
+    <dimen name="task_item_margin">4dp</dimen>
+    <dimen name="task_item_margin_right">4dp</dimen>
+    <dimen name="task_item_margin_left">4dp</dimen>
+    <dimen name="task_item_margin_up">4dp</dimen>
+    <dimen name="task_item_margin_down">4dp</dimen>
 </resources>
