@@ -94,13 +94,18 @@ class HomeFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val item = mAdapter.items[position]
                 mAdapter.saveItem(item, position)
-                // Implementar a lógica de salvar o item aqui
-                // Exemplo: Chamar mAdapter.saveItem(item, position)
-
+                // TODO Implementar a lógica de salvar o item aqui
+                //  Exemplo: Chamar mAdapter.saveItem(item, position)
+                val snackbar = Snackbar.make(linearLayout, "O item foi salvo.", Snackbar.LENGTH_LONG)
+                snackbar.setAction("Cancelar") {
+                    snackbar.dismiss()
+                }
+                snackbar.setActionTextColor(Color.YELLOW)
+                snackbar.show()
                 Timer().schedule(3000) {
                     requireActivity().runOnUiThread {
                         if (!mItemReturned) {
-                            mAdapter.update(taskList, position)
+                            mAdapter.notifyItemChanged(position)
                             mItemReturned = false
                         }
                     }

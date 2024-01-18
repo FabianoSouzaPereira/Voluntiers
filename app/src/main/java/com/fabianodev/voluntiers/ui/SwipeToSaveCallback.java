@@ -29,9 +29,8 @@ abstract public class SwipeToSaveCallback extends ItemTouchHelper.Callback {
         mBackground = new ColorDrawable();
         mBackground.setColor(Color.parseColor("#008000")); // Cor de fundo para salvar (verde, por exemplo)
         saveDrawable = ContextCompat.getDrawable(mContext, R.drawable.baseline_check_circle_outline_24);
-        assert saveDrawable != null;
-        intrinsicWidth = saveDrawable.getIntrinsicWidth();
-        intrinsicHeight = saveDrawable.getIntrinsicHeight();
+        intrinsicWidth = saveDrawable != null ? saveDrawable.getIntrinsicWidth() : 0;
+        intrinsicHeight = saveDrawable != null ? saveDrawable.getIntrinsicHeight() : 0;
     }
 
     @Override
