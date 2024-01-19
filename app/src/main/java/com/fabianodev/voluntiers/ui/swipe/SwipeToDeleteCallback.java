@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.ui;
+package com.fabianodev.voluntiers.ui.swipe;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,13 +20,13 @@ import com.fabianodev.voluntiers.R;
 
 abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
 
-    Context mContext;
     private final Paint mClearPaint;
     private final ColorDrawable mBackground;
     private final int backgroundColor;
     private final Drawable deleteDrawable;
     private final int intrinsicWidth;
     private final int intrinsicHeight;
+    Context mContext;
 
 
     protected SwipeToDeleteCallback(Context context) {

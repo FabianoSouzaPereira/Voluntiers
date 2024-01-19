@@ -37,4 +37,8 @@
     <string name="user">User</string>
     <string name="salve">Salve</string>
     <string name="delete">Delete</string>
+    <string name="nothing_to_show">Nothing to show</string>
+    <string name="image_home_screen">image home screen</string>
+    <string name="o_item_foi_salvo">O item foi salvo.</string>
+    <string name="cancel">Cancel</string>
 </resources>

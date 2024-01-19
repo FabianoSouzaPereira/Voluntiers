@@ -1,4 +1,4 @@
-package com.fabianodev.voluntiers.ui;
+package com.fabianodev.voluntiers.ui.swipe;
 
 import android.content.Context;
 import android.graphics.Canvas;

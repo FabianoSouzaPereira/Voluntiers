@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentHomeBinding
+import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.CustomImageViewWithText
 import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.TaskItem
-import com.fabianodev.voluntiers.ui.SwipeToDeleteCallback
-import com.fabianodev.voluntiers.ui.SwipeToSaveCallback
+import com.fabianodev.voluntiers.ui.swipe.SwipeToDeleteCallback
+import com.fabianodev.voluntiers.ui.swipe.SwipeToSaveCallback
 import com.google.android.material.snackbar.Snackbar
 import java.util.Timer
 import javax.inject.Inject
@@ -73,13 +74,19 @@ class HomeFragment : Fragment() {
         list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
         taskList.addAll(list)
 
-
         mAdapter = HomeAdapter(items = taskList)
         mAdapter.setHasStableIds(false)
         rvTasksList.adapter = mAdapter
         rvTasksList.layoutManager = LinearLayoutManager(requireContext())
-        linearLayout.addView(rvTasksList)
+        if (taskList.size > 0) {
+            linearLayout.addView(rvTasksList)
+        } else {
+            val customImageView = CustomImageViewWithText(requireContext(), null)
+            customImageView.setImageResource(R.drawable.empty_list)
+            customImageView.setText(getString(R.string.nothing_to_show))
 
+            linearLayout.addView(customImageView)
+        }
         root.addView(linearLayout, layoutParams)
         enableSwipeToAndUndoAndSave()
         enableSwipeToDeleteAndUndo()
@@ -94,10 +101,12 @@ class HomeFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val item = mAdapter.items[position]
                 mAdapter.saveItem(item, position)
-                // TODO Implementar a lógica de salvar o item aqui
-                //  Exemplo: Chamar mAdapter.saveItem(item, position)
-                val snackbar = Snackbar.make(linearLayout, "O item foi salvo.", Snackbar.LENGTH_LONG)
-                snackbar.setAction("Cancelar") {
+                mAdapter.removeItem(position)
+                val snackbar = Snackbar.make(linearLayout, getString(R.string.o_item_foi_salvo), Snackbar.LENGTH_LONG)
+                snackbar.setAction(getString(R.string.cancel)) {
+                    mItemReturned = true
+                    mAdapter.restoreItem(item, position)
+                    rvTasksList.scrollToPosition(position)
                     snackbar.dismiss()
                 }
                 snackbar.setActionTextColor(Color.YELLOW)
