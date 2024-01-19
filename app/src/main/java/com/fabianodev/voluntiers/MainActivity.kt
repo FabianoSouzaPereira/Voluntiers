@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.fabianodev.voluntiers.databinding.ActivityMainBinding
 import com.fabianodev.voluntiers.di.MainComponent
+import com.fabianodev.voluntiers.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity(), MenuProvider {
     private lateinit var binding: ActivityMainBinding
@@ -88,6 +89,9 @@ class MainActivity : AppCompatActivity(), MenuProvider {
             }
 
             R.id.logout -> {
+                val preferenceManager = PreferenceManager(this)
+                preferenceManager.savePreferenceString("token", "")
+                navController?.navigate(R.id.loginFragment)
                 true
             }
 
