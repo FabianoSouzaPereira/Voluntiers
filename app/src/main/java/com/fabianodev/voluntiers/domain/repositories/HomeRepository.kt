@@ -1,5 +1,7 @@
 package com.fabianodev.voluntiers.domain.repositories
 
+import com.fabianodev.voluntiers.domain.model.home.Home
+
 interface HomeRepository {
-    fun getUsers()
+    suspend fun getHomeContent(): Home
 }

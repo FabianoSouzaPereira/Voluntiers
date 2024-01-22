@@ -134,7 +134,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
     implementation "androidx.preference:preference-ktx:$preference_ktxVersion"
-
+    /** Shimmer **/
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
     /******** LifeCycle ********/
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataktxVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodelktxVersion"

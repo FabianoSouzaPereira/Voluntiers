@@ -45,8 +45,8 @@ class UserFragment : Fragment() {
         viewModel.userFormState.observe(viewLifecycleOwner,
                 Observer { userFormState ->
                     userFormState ?: return@Observer
-                    userFormState.UserFormStateError?.let { /* TODO Something */ }
-                    userFormState.UserFormStaterSuccess?.let { /* TODO Something */ }
+                    userFormState.userFormStateError?.let { /* TODO Something */ }
+                    userFormState.userFormStaterSuccess?.let { /* TODO Something */ }
                 })
     }
 }

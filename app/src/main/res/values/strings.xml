@@ -41,4 +41,5 @@
     <string name="image_home_screen">image home screen</string>
     <string name="o_item_foi_salvo">O item foi salvo.</string>
     <string name="cancel">Cancel</string>
+    <string name="error_on_get_content">Error on get content</string>
 </resources>
