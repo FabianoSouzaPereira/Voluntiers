@@ -1,20 +1,24 @@
 package com.fabianodev.voluntiers.di
 
-import android.content.Context
+import android.app.Application
+import com.fabianodev.voluntiers.data.di.FirebaseDataSourceModuleTest
+import dagger.Component
+import dagger.Module
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
+@Component(modules = [AppModuleTest::class, DataModuleTest::class, SubComponentsModuleTest::class, SubComponentFirebaseModuleTest::class])
 class ApplicationComponentTest {
 
-    private lateinit var context: Context
+    private lateinit var application: Application
     private lateinit var applicationComponent: ApplicationComponent
 
     @BeforeEach
     fun setUp() {
-        context = mockk(relaxed = true)
-        applicationComponent = DaggerApplicationComponent.factory().create(context)
+        application = mockk(relaxed = true)
+        applicationComponent = DaggerApplicationComponent.factory().create(application)
     }
 
     @Test
@@ -23,3 +27,9 @@ class ApplicationComponentTest {
         assertNotNull(mainComponentFactory, "MainComponent.Factory should not be null")
     }
 }
+
+@Module(subcomponents = [MainComponentTest::class])
+object SubComponentsModuleTest
+
+@Module(subcomponents = [FirebaseDataSourceModuleTest::class])
+object SubComponentFirebaseModuleTest

@@ -9,7 +9,6 @@ import com.fabianodev.voluntiers.presentation.login.LoginViewModelTest
 import com.fabianodev.voluntiers.presentation.main.MainFragment
 import com.fabianodev.voluntiers.presentation.settings.SettingsFragment
 import com.fabianodev.voluntiers.presentation.user.UserFragment
-import com.google.android.ads.mediationtestsuite.viewmodels.ViewModelFactory
 import dagger.Subcomponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -18,8 +17,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  */
 @Subcomponent(modules = [MainModuleTest::class])
 interface MainComponentTest : MainComponent {
-    fun viewModelFactory(): ViewModelFactory
-
     @OptIn(ExperimentalCoroutinesApi::class)
     fun inject(test: LoginViewModelTest)
     override fun inject(activity: MainActivity)
