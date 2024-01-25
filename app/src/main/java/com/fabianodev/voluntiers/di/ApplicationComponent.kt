@@ -1,18 +1,19 @@
 package com.fabianodev.voluntiers.di
 
-import android.content.Context
+import android.app.Application
 import com.fabianodev.voluntiers.data.di.FirebaseDataSourceModule
+import com.fabianodev.voluntiers.di.submodules.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DataModule::class, ViewModelBuilder::class, SubComponentsModule::class, SubComponentFirebaseModule::class])
+@Component(modules = [AppModule::class, DataModule::class, ViewModelBuilder::class, SubComponentsModule::class, SubComponentFirebaseModule::class])
 interface ApplicationComponent {
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance applicationComponent: Context): ApplicationComponent
+        fun create(@BindsInstance application: Application): ApplicationComponent
     }
 
     fun mainComponent(): MainComponent.Factory

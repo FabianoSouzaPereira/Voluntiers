@@ -2,6 +2,7 @@ package com.fabianodev.voluntiers.di
 
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.data.login.RemoteLoginDataSource
+import com.fabianodev.voluntiers.di.submodules.MainComponent
 import com.fabianodev.voluntiers.presentation.home.HomeFragment
 import com.fabianodev.voluntiers.presentation.login.LoginFragment
 import com.fabianodev.voluntiers.presentation.login.LoginViewModelTest

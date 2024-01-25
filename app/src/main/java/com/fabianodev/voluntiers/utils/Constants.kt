@@ -14,9 +14,9 @@ object Constants {
     const val APPOINTMENTS = "appointments"
     const val CONNECTTIMEOUT = 30
     const val READTIMEOUT = 10
-    const val DATABASE_DOCUMENTS = "$API_SERVER_NAME$PROJECT/databases/$DATABASEID/documents/"
-    const val INSTITUTIONS = "/Institutions/"
-    const val INSTITUTION_ID = "id"
+    const val DATABASE_DOCUMENTS = "$API_SERVER_NAME$PROJECT/databases/$DATABASEID/documents"
+    const val INSTITUTIONS = "/Institutions"
+    const val INSTITUTION_ID = "{id}"
     const val User = "Users"
 
     object Endpoint {
@@ -24,6 +24,6 @@ object Constants {
         const val USER_COLLECTION = "$BASE_URL/$COLLECTION"
         const val POST_LOGIN = "$BASE_URL$ACCOUNTS?key=$API_KEY"
         const val GET_APPOINTMENTS = "$DATABASE_DOCUMENTS/$APPOINTMENTS"
-        const val GET_TASKS = "$DATABASE_DOCUMENTS$INSTITUTIONS$INSTITUTION_ID"
+        const val GET_TASKS = "$DATABASE_DOCUMENTS$INSTITUTIONS/$INSTITUTION_ID/tasks/"
     }
 }

@@ -8,10 +8,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RemoteHomeDataSource @Inject constructor(private val apiService: IHomeApiService) : HomeRepository {
-    override suspend fun getHomeContent(): Home {
+    override suspend fun getHomeContent(id: String): Home {
         return try {
             withContext(Dispatchers.IO) {
-                val content: Home = apiService.getHomeContent()
+                val content: Home = apiService.getHomeContent(id = id)
                 content
             }
         } catch (e: Throwable) {

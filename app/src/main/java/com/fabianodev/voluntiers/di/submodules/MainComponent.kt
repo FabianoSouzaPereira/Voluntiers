@@ -1,5 +1,6 @@
-package com.fabianodev.voluntiers.di
+package com.fabianodev.voluntiers.di.submodules
 
+import com.fabianodev.voluntiers.AppApplication
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.data.login.RemoteLoginDataSource
 import com.fabianodev.voluntiers.presentation.home.HomeFragment
@@ -17,6 +18,7 @@ interface MainComponent {
         fun create(): MainComponent
     }
 
+    fun inject(application: AppApplication)
     fun inject(activity: MainActivity)
     fun inject(fragment: HomeFragment)
     fun inject(fragment: LoginFragment)

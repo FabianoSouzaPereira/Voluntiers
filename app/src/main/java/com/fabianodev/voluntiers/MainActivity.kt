@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.fabianodev.voluntiers.databinding.ActivityMainBinding
-import com.fabianodev.voluntiers.di.MainComponent
+import com.fabianodev.voluntiers.di.submodules.MainComponent
 import com.fabianodev.voluntiers.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity(), MenuProvider {

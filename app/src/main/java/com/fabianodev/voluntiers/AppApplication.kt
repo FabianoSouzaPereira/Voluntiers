@@ -7,9 +7,11 @@ import com.google.firebase.FirebaseApp
 
 
 class AppApplication : Application() {
-    val appComponent: ApplicationComponent = DaggerApplicationComponent.factory().create(this)
+    lateinit var appComponent: ApplicationComponent
+
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+        appComponent = DaggerApplicationComponent.factory().create(this)
     }
 }

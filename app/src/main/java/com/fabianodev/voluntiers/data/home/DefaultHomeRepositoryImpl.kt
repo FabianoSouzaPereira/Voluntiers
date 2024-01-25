@@ -6,9 +6,9 @@ import com.fabianodev.voluntiers.domain.repositories.HomeRepository
 import javax.inject.Inject
 
 class DefaultHomeRepositoryImpl @Inject constructor(val context: Context, private val dataSource: RemoteHomeDataSource) : HomeRepository {
-    override suspend fun getHomeContent(): Home {
+    override suspend fun getHomeContent(id: String): Home {
         try {
-            return dataSource.getHomeContent()
+            return dataSource.getHomeContent(id = id)
         } catch (e: Throwable) {
             throw e
         }

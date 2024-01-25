@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ import com.fabianodev.voluntiers.presentation.widgets.shimmer.ShimmerUtil
 import com.fabianodev.voluntiers.ui.swipe.SwipeToDeleteCallback
 import com.fabianodev.voluntiers.ui.swipe.SwipeToSaveCallback
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 import java.util.Timer
 import javax.inject.Inject
 import kotlin.concurrent.schedule
@@ -55,22 +57,12 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root = binding.root
-        viewModel.homeResult.observe(viewLifecycleOwner,
-                Observer { homeResult ->
-                    if (homeResult == null)
-                        return@Observer
-
-                    homeResult.success?.let {
-                        print("ok")
-                    }
-                }
-        )
-        val list = mutableListOf<TaskItem>()
-        list.add(TaskItem(codigo = 1, title = "Tarefa 1", description = "Descrição da tarefa 1"))
-        list.add(TaskItem(codigo = 2, title = "Tarefa 2", description = "Descrição da tarefa 2"))
-        list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
-        taskList.addAll(list)
-
+        val shimmerLayout = ShimmerUtil.createShimmerLayout(requireContext()).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
         linearLayout = LinearLayoutCompat(requireContext()).apply {
             id = ViewCompat.generateViewId()
             orientation = LinearLayoutCompat.VERTICAL
@@ -81,14 +73,12 @@ class HomeFragment : Fragment() {
                 topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
             }
         }
-
-        val shimmerLayout = ShimmerUtil.createShimmerLayout(requireContext()).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-        }
-
+        linearLayout.addView(shimmerLayout)
+        layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.MATCH_PARENT
+        )
+        layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
         rvTasksList = RecyclerView(requireContext()).apply {
             layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -96,23 +86,45 @@ class HomeFragment : Fragment() {
             )
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        viewModel.homeResult.observe(viewLifecycleOwner,
+                Observer { homeResult ->
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.visibility = View.GONE
+                    if (homeResult == null)
+                        return@Observer
+
+                    homeResult.success?.let {
+                        val list = mutableListOf<TaskItem>()
+                        list.add(TaskItem(codigo = 1, title = "Tarefa 1", description = "Descrição da tarefa 1"))
+                        list.add(TaskItem(codigo = 2, title = "Tarefa 2", description = "Descrição da tarefa 2"))
+                        list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
+                        taskList.addAll(list)
+                        linearLayout.removeView(shimmerLayout)
+                        for ((index, item) in taskList.withIndex()) {
+                            mAdapter.update(list = taskList, position = index)
+                        }
+                        if (taskList.size > 0) {
+                            linearLayout.addView(rvTasksList)
+                        } else {
+                            val customImageView = CustomImageViewWithText(requireContext(), null)
+                            customImageView.setImageResource(R.drawable.empty_list)
+                            customImageView.setText(getString(R.string.nothing_to_show))
+
+                            linearLayout.addView(customImageView)
+                        }
+
+                    }
+                }
+        )
         mAdapter = HomeAdapter(items = taskList)
         mAdapter.setHasStableIds(false)
         rvTasksList.adapter = mAdapter
-
-        if (taskList.size > 0) {
-            linearLayout.addView(rvTasksList)
-        } else {
-            val customImageView = CustomImageViewWithText(requireContext(), null)
-            customImageView.setImageResource(R.drawable.empty_list)
-            customImageView.setText(getString(R.string.nothing_to_show))
-
-            linearLayout.addView(customImageView)
-        }
+        linearLayout.addView(rvTasksList)
         root.addView(linearLayout, layoutParams)
+
         enableSwipeToAndUndoAndSave()
         enableSwipeToDeleteAndUndo()
-
         return root
     }
 
@@ -147,7 +159,6 @@ class HomeFragment : Fragment() {
         itemTouchhelperSave.attachToRecyclerView(rvTasksList)
     }
 
-
     /* Delete item from Recycle view and undo if until 3 seconds */
     private fun enableSwipeToDeleteAndUndo() {
         val swipeToDeleteCallback = object : SwipeToDeleteCallback(requireContext()) {
@@ -178,6 +189,12 @@ class HomeFragment : Fragment() {
         itemTouchhelper.attachToRecyclerView(rvTasksList)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            viewModel.getHomeContent(id = "HVsHmyi8zJP39LQbB6sH")
+        }
+    }
 
     companion object {
         fun newInstance() = HomeFragment()

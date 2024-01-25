@@ -8,9 +8,9 @@ import javax.inject.Inject
  * Created by Fabiano Pereira on 22/01/2024.
  */
 class HomeUseCase @Inject constructor(private val homeRepository: HomeRepository) {
-    suspend fun execute(): Home? {
+    suspend fun execute(id: String): Home? {
         return try {
-            homeRepository.getHomeContent()
+            homeRepository.getHomeContent(id = id)
         } catch (e: Throwable) {
             null
         }
