@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,9 +21,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fabianodev.voluntiers.MainActivity
 import com.fabianodev.voluntiers.R
 import com.fabianodev.voluntiers.databinding.FragmentHomeBinding
+import com.fabianodev.voluntiers.presentation.home.widget.HomeShimmer
+import com.fabianodev.voluntiers.presentation.widgets.DrawableDivider
 import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.CustomImageViewWithText
 import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.TaskItem
-import com.fabianodev.voluntiers.presentation.widgets.shimmer.ShimmerUtil
 import com.fabianodev.voluntiers.ui.swipe.SwipeToDeleteCallback
 import com.fabianodev.voluntiers.ui.swipe.SwipeToSaveCallback
 import com.google.android.material.snackbar.Snackbar
@@ -40,9 +42,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var rvTasksList: RecyclerView
     private lateinit var linearLayout: LinearLayoutCompat
+    private lateinit var marginLayoutParamCompat: MarginLayoutParamsCompat
     private lateinit var layoutParams: ConstraintLayout.LayoutParams
     private lateinit var mAdapter: HomeAdapter
     private val taskList = mutableListOf<TaskItem>()
+    private val newTaskList = mutableListOf<TaskItem>()
     private var mItemPressed: Boolean = false
     private var mItemReturned: Boolean = false
 
@@ -57,12 +61,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root = binding.root
-        val shimmerLayout = ShimmerUtil.createShimmerLayout(requireContext()).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-        }
+
         linearLayout = LinearLayoutCompat(requireContext()).apply {
             id = ViewCompat.generateViewId()
             orientation = LinearLayoutCompat.VERTICAL
@@ -73,7 +72,40 @@ class HomeFragment : Fragment() {
                 topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
             }
         }
-        linearLayout.addView(shimmerLayout)
+
+        linearLayout = LinearLayoutCompat(requireContext()).apply {
+            id = ViewCompat.generateViewId()
+            orientation = LinearLayoutCompat.VERTICAL
+            layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    ConstraintLayout.LayoutParams.MATCH_PARENT
+            ).apply {
+                topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
+            }
+        }
+
+        linearLayout = LinearLayoutCompat(requireContext()).apply {
+            id = ViewCompat.generateViewId()
+            orientation = LinearLayoutCompat.VERTICAL
+            layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    ConstraintLayout.LayoutParams.MATCH_PARENT
+            ).apply {
+                topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
+            }
+        }
+        val shimmerLayouts = mutableListOf<View>()
+        for (i in 1..16) {
+            val type = i % 2 != 0 // Alternando entre true e false
+            shimmerLayouts.add(HomeShimmer().shimmer(requireContext(), type))
+            if (!type) {
+                shimmerLayouts.add(DrawableDivider().createDivider(requireContext()))
+            }
+        }
+        shimmerLayouts.forEach { shimmerLayout ->
+            linearLayout.addView(shimmerLayout)
+        }
+
         layoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                 ConstraintLayout.LayoutParams.MATCH_PARENT
@@ -89,8 +121,8 @@ class HomeFragment : Fragment() {
 
         viewModel.homeResult.observe(viewLifecycleOwner,
                 Observer { homeResult ->
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.visibility = View.GONE
+                    //   shimmerLayout.stopShimmer()
+                    //   shimmerLayout.visibility = View.GONE
                     if (homeResult == null)
                         return@Observer
 
@@ -100,11 +132,19 @@ class HomeFragment : Fragment() {
                         list.add(TaskItem(codigo = 2, title = "Tarefa 2", description = "Descrição da tarefa 2"))
                         list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
                         taskList.addAll(list)
-                        linearLayout.removeView(shimmerLayout)
+                        shimmerLayouts.forEach { shimmerLayout ->
+                            linearLayout.removeView(shimmerLayout)
+                            linearLayout.removeView(DrawableDivider().createDivider(requireContext()))
+                        }
+
                         for ((index, item) in taskList.withIndex()) {
                             mAdapter.update(list = taskList, position = index)
                         }
                         if (taskList.size > 0) {
+                            shimmerLayouts.forEach { shimmerLayout ->
+                                linearLayout.removeView(shimmerLayout)
+                                linearLayout.removeView(DrawableDivider().createDivider(requireContext()))
+                            }
                             linearLayout.addView(rvTasksList)
                         } else {
                             val customImageView = CustomImageViewWithText(requireContext(), null)
@@ -115,6 +155,28 @@ class HomeFragment : Fragment() {
                         }
 
                     }
+
+                    /*   homeResult.error?.let {
+                           val list = mutableListOf<TaskItem>()
+                           list.add(TaskItem(codigo = 1, title = "Sem dados", description = "Erro ao carregar o conteúdo"))
+                           taskList.addAll(list)
+                           linearLayout.removeView(shimmerLayout)
+
+                           for ((index, item) in taskList.withIndex()) {
+                               newTaskList.add(index, item)
+                           }
+                           mAdapter.updateALL(list = newTaskList)
+                           if (newTaskList.size > 0) {
+                               //  linearLayout.removeView(rvTasksList)
+                               //   linearLayout.addView(rvTasksList)
+                           } else {
+                               val customImageView = CustomImageViewWithText(requireContext(), null)
+                               customImageView.setImageResource(R.drawable.empty_list)
+                               customImageView.setText(getString(R.string.nothing_to_show))
+
+                               linearLayout.addView(customImageView)
+                           }
+                       } */
                 }
         )
         mAdapter = HomeAdapter(items = taskList)

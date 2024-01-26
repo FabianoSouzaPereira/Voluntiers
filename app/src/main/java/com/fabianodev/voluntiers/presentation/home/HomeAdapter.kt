@@ -44,5 +44,12 @@ class HomeAdapter(val items: MutableList<TaskItem>) : RecyclerView.Adapter<HomeA
         }
     }
 
+    fun updateALL(list: MutableList<TaskItem>, position: Int? = null) {
+        items.clear()
+        items.addAll(list)
+        ///   notifyItemRangeInserted(position, list.size)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(val taskItemView: TaskItemView) : RecyclerView.ViewHolder(taskItemView)
 }
