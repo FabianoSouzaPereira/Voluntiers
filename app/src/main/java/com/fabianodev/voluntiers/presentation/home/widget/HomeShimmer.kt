@@ -3,7 +3,6 @@ package com.fabianodev.voluntiers.presentation.home.widget
 import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,12 +10,13 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import com.fabianodev.voluntiers.presentation.widgets.shimmer.ShimmerUtil
+import com.facebook.shimmer.ShimmerFrameLayout
 
 /**
  * Created by Fabiano Pereira on 26/01/2024.
  */
 class HomeShimmer {
-    fun shimmer(context: Context, first: Boolean): View {
+    fun shimmer(context: Context, first: Boolean): ShimmerFrameLayout {
         return ShimmerUtil.createShimmerLayout(context).apply {
             layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -32,7 +32,7 @@ class HomeShimmer {
                     val marginInPixels = TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 16f, resources.displayMetrics
                     ).toInt()
-                    lp.setMargins(marginInPixels, marginInPixels, marginInPixels, 5)
+                    lp.setMargins(marginInPixels, marginInPixels, marginInPixels, 1)
                 }
                 val card1 = CardView(context).apply {
                     layoutParams = LinearLayout.LayoutParams(

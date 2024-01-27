@@ -27,6 +27,7 @@ import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.CustomImageView
 import com.fabianodev.voluntiers.presentation.widgets.rvTaskItem.TaskItem
 import com.fabianodev.voluntiers.ui.swipe.SwipeToDeleteCallback
 import com.fabianodev.voluntiers.ui.swipe.SwipeToSaveCallback
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.util.Timer
@@ -94,8 +95,8 @@ class HomeFragment : Fragment() {
                 topMargin = resources.getDimensionPixelSize(R.dimen.toolbar_height)
             }
         }
-        val shimmerLayouts = mutableListOf<View>()
-        for (i in 1..16) {
+        val shimmerLayouts = mutableListOf<ShimmerFrameLayout>()
+        for (i in 1..12) {
             val type = i % 2 != 0 // Alternando entre true e false
             shimmerLayouts.add(HomeShimmer().shimmer(requireContext(), type))
             if (!type) {
@@ -103,7 +104,7 @@ class HomeFragment : Fragment() {
             }
         }
         shimmerLayouts.forEach { shimmerLayout ->
-            linearLayout.addView(shimmerLayout)
+            linearLayout.addView(shimmerLayout as View?)
         }
 
         layoutParams = ConstraintLayout.LayoutParams(
@@ -121,8 +122,11 @@ class HomeFragment : Fragment() {
 
         viewModel.homeResult.observe(viewLifecycleOwner,
                 Observer { homeResult ->
-                    //   shimmerLayout.stopShimmer()
-                    //   shimmerLayout.visibility = View.GONE
+                    shimmerLayouts.forEach { shimmerLayout ->
+                        shimmerLayout.stopShimmer()
+                        shimmerLayout.visibility = View.GONE
+                    }
+
                     if (homeResult == null)
                         return@Observer
 
@@ -132,17 +136,14 @@ class HomeFragment : Fragment() {
                         list.add(TaskItem(codigo = 2, title = "Tarefa 2", description = "Descrição da tarefa 2"))
                         list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
                         taskList.addAll(list)
-                        shimmerLayouts.forEach { shimmerLayout ->
-                            linearLayout.removeView(shimmerLayout)
-                            linearLayout.removeView(DrawableDivider().createDivider(requireContext()))
-                        }
+
 
                         for ((index, item) in taskList.withIndex()) {
                             mAdapter.update(list = taskList, position = index)
                         }
                         if (taskList.size > 0) {
                             shimmerLayouts.forEach { shimmerLayout ->
-                                linearLayout.removeView(shimmerLayout)
+                                linearLayout.removeView(shimmerLayout as View?)
                                 linearLayout.removeView(DrawableDivider().createDivider(requireContext()))
                             }
                             linearLayout.addView(rvTasksList)
@@ -156,27 +157,26 @@ class HomeFragment : Fragment() {
 
                     }
 
-                    /*   homeResult.error?.let {
-                           val list = mutableListOf<TaskItem>()
-                           list.add(TaskItem(codigo = 1, title = "Sem dados", description = "Erro ao carregar o conteúdo"))
-                           taskList.addAll(list)
-                           linearLayout.removeView(shimmerLayout)
-
-                           for ((index, item) in taskList.withIndex()) {
-                               newTaskList.add(index, item)
-                           }
-                           mAdapter.updateALL(list = newTaskList)
-                           if (newTaskList.size > 0) {
-                               //  linearLayout.removeView(rvTasksList)
-                               //   linearLayout.addView(rvTasksList)
-                           } else {
-                               val customImageView = CustomImageViewWithText(requireContext(), null)
-                               customImageView.setImageResource(R.drawable.empty_list)
-                               customImageView.setText(getString(R.string.nothing_to_show))
-
-                               linearLayout.addView(customImageView)
-                           }
-                       } */
+                    homeResult.error?.let {
+                        val list = mutableListOf<TaskItem>()
+//                        list.add(TaskItem(codigo = 1, title = "Sem dados", description = "Erro ao carregar o conteúdo"))
+                        taskList.addAll(list)
+//
+                        for ((index, item) in taskList.withIndex()) {
+                            newTaskList.add(index, item)
+                        }
+                        mAdapter.updateALL(list = newTaskList)
+                        if (newTaskList.size > 0) {
+                            linearLayout.removeView(rvTasksList)
+                            linearLayout.addView(rvTasksList)
+                        } else {
+                            linearLayout.removeView(rvTasksList)
+                            val customImageView = CustomImageViewWithText(requireContext(), null)
+                            customImageView.setImageResource(R.drawable.empty_list)
+                            customImageView.setText(getString(R.string.nothing_to_show))
+                            linearLayout.addView(customImageView)
+                        }
+                    }
                 }
         )
         mAdapter = HomeAdapter(items = taskList)
