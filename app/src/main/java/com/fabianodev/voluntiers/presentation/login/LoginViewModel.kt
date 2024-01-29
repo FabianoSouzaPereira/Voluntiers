@@ -29,6 +29,7 @@ class LoginViewModel @Inject constructor(context: Context, private val loginUseC
             if (result != null) {
                 _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.displayName))
                 preferenceManager.savePreferenceString("token", result.idToken)
+                println("SALVED TOKEN = ${result.idToken}")
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }

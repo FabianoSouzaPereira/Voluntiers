@@ -72,7 +72,7 @@ class TaskItemView(context: Context) : LinearLayout(context) {
     }
 
     fun bind(taskItem: TaskItem) {
-        titleTextView.text = taskItem.title
-        descriptionTextView.text = taskItem.description
+        titleTextView.text = taskItem.fields.title.toString()
+        descriptionTextView.text = taskItem.fields.description.toString()
     }
 }

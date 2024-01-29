@@ -2,12 +2,28 @@
   <dictionary name="fsp">
     <words>
       <w>authenticationmodel</w>
+      <w>batchcreate</w>
+      <w>batchdelete</w>
+      <w>batchget</w>
       <w>codigo</w>
+      <w>createauthuri</w>
       <w>fabianodev</w>
       <w>interseptor</w>
+      <w>issuesamlresponse</w>
+      <w>passsword</w>
+      <w>resetpassword</w>
+      <w>sendoobcode</w>
+      <w>sendverificationcode</w>
+      <w>signinwithcustomtoken</w>
+      <w>signinwithemaillink</w>
+      <w>signinwithgamecenter</w>
+      <w>signinwithid</w>
+      <w>signinwithpassword</w>
+      <w>signinwithphonenumber</w>
       <w>snackbar</w>
       <w>userform</w>
       <w>userstatus</w>
+      <w>verifyiosclient</w>
       <w>voluntiers</w>
     </words>
   </dictionary>

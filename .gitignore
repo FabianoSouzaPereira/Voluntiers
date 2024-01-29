@@ -1,3 +1,18 @@
+#built application files
+*.apk
+*.ap_
+*.aab
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
 *.iml
 .gradle
 /local.properties
@@ -10,7 +25,10 @@
 .DS_Store
 /build
 /captures
+output.json 
+.navigation
 .externalNativeBuild
 .cxx
 local.properties
 keystore.properties
+/app/apiRoutes.txt

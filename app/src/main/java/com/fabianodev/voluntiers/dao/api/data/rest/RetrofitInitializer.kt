@@ -1,7 +1,6 @@
 package com.fabianodev.voluntiers.dao.api.data.rest
 
 import com.fabianodev.voluntiers.utils.Constants
-import com.fabianodev.voluntiers.utils.Constants.API_SERVER_AUTH
 import com.fabianodev.voluntiers.utils.Constants.API_SERVER_NAME
 import okhttp3.*
 import retrofit2.Retrofit
@@ -16,8 +15,8 @@ class RetrofitInitializer(token: String) {
     private val interseptor: RedirectInterceptor = RedirectInterceptor(token)
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+            .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
             .addInterceptor(interseptor)
-            .protocols(Collections.singletonList(Protocol.HTTP_1_1))
             .connectTimeout(timeout, TimeUnit.SECONDS)
             .readTimeout(readTimeout, TimeUnit.SECONDS)
             .build()
@@ -45,16 +44,20 @@ open class RedirectInterceptor(tokenInterceptor: String) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
-        var modifiedRequest: Request = originalRequest
-        if (!originalRequest.url().toString().contentEquals(API_SERVER_AUTH)) {
+        var modifiedRequest: Request = chain.request()
+
+        if (!originalRequest.url().toString().contentEquals("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyATLSd5MUNBIBKc2GfeO3XZKJAE3n-2O2c")) {
             modifiedRequest = token.let {
+                println(it)
                 originalRequest.newBuilder()
                         .header("Authorization", "Bearer $it")
+                        .method(originalRequest.method(), originalRequest.body())
                         .build()
             } ?: originalRequest
+            return chain.proceed(modifiedRequest)
         }
-        var response: Response = chain.proceed(modifiedRequest)
-
+//        var response: Response = chain.proceed(originalRequest)
+//
 //        if (response.code() == 307) {
 //            modifiedRequest = response.header("Location")?.let {
 //                val first = it.slice(0..0)
@@ -65,6 +68,6 @@ open class RedirectInterceptor(tokenInterceptor: String) : Interceptor {
 //            }!!
 //            response = chain.proceed(modifiedRequest)
 //        }
-        return response
+        return chain.proceed(originalRequest)
     }
 }

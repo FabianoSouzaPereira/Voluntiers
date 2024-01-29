@@ -132,50 +132,39 @@ class HomeFragment : Fragment() {
 
                     homeResult.success?.let {
                         val list = mutableListOf<TaskItem>()
-                        list.add(TaskItem(codigo = 1, title = "Tarefa 1", description = "Descrição da tarefa 1"))
-                        list.add(TaskItem(codigo = 2, title = "Tarefa 2", description = "Descrição da tarefa 2"))
-                        list.add(TaskItem(codigo = 3, title = "Tarefa 3", description = "Descrição da tarefa 3"))
+                        for (item in it.homeTaskList) {
+                            list.add(item)
+                        }
                         taskList.addAll(list)
 
-
                         for ((index, item) in taskList.withIndex()) {
-                            mAdapter.update(list = taskList, position = index)
+                            newTaskList.add(index, item)
                         }
+
                         if (taskList.size > 0) {
                             shimmerLayouts.forEach { shimmerLayout ->
                                 linearLayout.removeView(shimmerLayout as View?)
                                 linearLayout.removeView(DrawableDivider().createDivider(requireContext()))
                             }
+                            linearLayout.removeView(rvTasksList)
                             linearLayout.addView(rvTasksList)
                         } else {
+                            linearLayout.removeView(rvTasksList)
                             val customImageView = CustomImageViewWithText(requireContext(), null)
                             customImageView.setImageResource(R.drawable.empty_list)
                             customImageView.setText(getString(R.string.nothing_to_show))
 
                             linearLayout.addView(customImageView)
                         }
-
                     }
 
                     homeResult.error?.let {
-                        val list = mutableListOf<TaskItem>()
-//                        list.add(TaskItem(codigo = 1, title = "Sem dados", description = "Erro ao carregar o conteúdo"))
-                        taskList.addAll(list)
-//
-                        for ((index, item) in taskList.withIndex()) {
-                            newTaskList.add(index, item)
-                        }
-                        mAdapter.updateALL(list = newTaskList)
-                        if (newTaskList.size > 0) {
-                            linearLayout.removeView(rvTasksList)
-                            linearLayout.addView(rvTasksList)
-                        } else {
-                            linearLayout.removeView(rvTasksList)
-                            val customImageView = CustomImageViewWithText(requireContext(), null)
-                            customImageView.setImageResource(R.drawable.empty_list)
-                            customImageView.setText(getString(R.string.nothing_to_show))
-                            linearLayout.addView(customImageView)
-                        }
+                        //todo popup to error request
+                        linearLayout.removeView(rvTasksList)
+                        val customImageView = CustomImageViewWithText(requireContext(), null)
+                        customImageView.setImageResource(R.drawable.empty_list)
+                        customImageView.setText(getString(R.string.nothing_to_show))
+                        linearLayout.addView(customImageView)
                     }
                 }
         )
